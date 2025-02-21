@@ -1,65 +1,81 @@
+# 🍒 Cherry On Top - KOMSAI 2025 Hackathon Team
 
-# 🍒 Cherry On Top - Hackathon Team
+I'm the cherry on top, cherry on top!
 
-Welcome to Cherry On Top! We are a passionate team participating in this hackathon, aiming to build something innovative and impactful.
+Passionate team looking to build something innovative, impactful, and smart.
 
+## 👥 Members
 
-# Project Overview
-Our project aims to [briefly describe your project]. We are developing [e.g., a web app, mobile application, AI tool] that [solves a specific problem or enhances user experience in a particular way].
+| Full Name                    | GitHub Profile                                    |
+| ---------------------------- | ------------------------------------------------- |
+| ⭐ **Orate**, Felicity V.    | [leeroi02](https://github.com/leeroi02)           |
+| **Binangbang**, Derrick C.   | [drkcutie](https://github.com/drkcutie)           |
+| **Dael**, Philippe Andrei S. | [rei_naissance](https://github.com/rei-naissance) |
+| **Floreta**, Zak O.          | [Kaazzz](https://github.com/Kaazzz)               |
+| **Porter**, Nicolo Ryne A.   | [nicoryne](https://github.com/nicoryne)           |
 
-Key objectives:
+## 🗒️ Project Overview
 
-    [Objective 1] (e.g., "Make it easier for users to manage tasks using AI.")
-    [Objective 2] (e.g., "Provide a seamless cross-platform experience.")
-    [Objective 3] (e.g., "Ensure high performance and accessibility.")
-## Authors
+Our project aims to [briefly describe your project]. We are developing [e.g. a web app, mobile application, AI tool] that [solves a specific problem or enhances user experience in a particular way].
 
-- [@leeroi02](https://github.com/leeroi02)
-- [@Kaazzz](https://github.com/Kaazzz)
+### Key Objectives
 
-- [@drkcutie](https://github.com/drkcutie)
+🔑 Objective 1 (e.g. "Make it easier for users to manage tasks using AI.")
 
-- [@rei_naissance](https://github.com/rei-naissance)
+🔑 Objective 2 (e.g. "Provide a seamless cross-platform experience.")
 
-- [@nicoryne](https://github.com/nicoryne)
+🔑 Objective 3 (e.g. "Ensure high performance and accessibility.")
 
+## 📂 Repository Contents Overview
 
+This repository contains the source code, documentation, and necessary resources for SariSmart. The key directories and files include:
 
-## Features
-TBD
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
+- `README.md` - Project overview and setup instructions.
 
+## 🚀 Features
 
-## Installation
+- ❓ **Feature 1** - Sample Feature Block.
+- ❓ **Feature 2** - Sample Feature Block.
+- ❓ **Feature 3** – Sample Feature Block.
 
-Install my-project with npm
+## 🌍 Branching
 
-```bash
-  npm install my-project
-  cd my-project
-```
-    
-## Usage/Examples
+We follow the Gitflow workflow:
 
-```javascript
-import Component from 'my-project'
+- `main` - Stable production-ready branch.
+- `dev` - Latest development updates.
+- `feature/{feature-name}` - Feature branches for new functionalities.
+- `hotfix/{issue-name}` - Quick fixes for critical bugs.
+- `bugfix/{issue-name}` - Bug fixes and minor patches.
+- `release/{version}` - Preparation branch for new releases.
 
-function App() {
-  return <Component />
-}
-```
+## 🛠️ Installation Guide
 
+> **Prerequisite:**
 
-## Tech Stack
+### Steps:
 
-**Client:** TBD \
-**Server:** TBD
+1. Clone the repository:
 
+   ```sh
+   git clone https://github.com/drkcutie/cherry_on_top.git
+   cd cherry_on_top
+   ```
 
-## Running Tests
+2. Install dependencies (Sample Step):
+
+   ```sh
+     npm install
+   ```
+
+## ⚙️ Development Configurations
+
+- **Frontend:** To be decided.
+- **Backend:** To be decided.
+- **State Management:** To be decided.
+- **Authentication:** To be decided.
+
+## 🤖 Running Tests
 
 To run tests, run the following command
 
@@ -67,13 +83,4 @@ To run tests, run the following command
   npm run test
 ```
 
-
-## Appendix
-
-Any additional information goes here
-
-
-## Screenshots
-
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-
+## 📸 Screenshots
