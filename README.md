@@ -40,14 +40,26 @@ This repository contains the source code, documentation, and necessary resources
 
 ## 🌍 Branching
 
-We follow the Gitflow workflow:
+We follow this git workflow:
+
+### **Main Branches**
 
 - `main` - Stable production-ready branch.
 - `dev` - Latest development updates.
-- `feature/{feature-name}` - Feature branches for new functionalities.
-- `hotfix/{issue-name}` - Quick fixes for critical bugs.
-- `bugfix/{issue-name}` - Bug fixes and minor patches.
-- `release/{version}` - Preparation branch for new releases.
+
+### **Backend Branches**
+
+- `backend/dev` - Backend development branch.
+- `backend/feature/{feature-name}` - New backend features.
+- `backend/hotfix/{issue-name}` - Critical backend fixes.
+- `backend/bugfix/{issue-name}` - Backend bug fixes and minor patches.
+
+### **Frontend Branches**
+
+- `frontend/dev` - Frontend development branch.
+- `frontend/feature/{feature-name}` - New frontend features.
+- `frontend/hotfix/{issue-name}` - Critical frontend fixes.
+- `frontend/bugfix/{issue-name}` - Frontend bug fixes and minor patches.
 
 ## 🛠️ Installation Guide
 
