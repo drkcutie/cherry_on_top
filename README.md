@@ -32,6 +32,7 @@ RESIKLO is an AI-driven waste reduction and tracking platform designed to make s
 
 This repository contains the source code, documentation, and necessary resources for SariSmart. The key directories and files include:
 
+- `frontend` - React Native frontend directory.
 - `README.md` - Project overview and setup instructions.
 
 ## 🚀 Features
