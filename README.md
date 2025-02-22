@@ -16,15 +16,17 @@ Passionate team looking to build something innovative, impactful, and smart.
 
 ## 🗒️ Project Overview
 
-Our project aims to [briefly describe your project]. We are developing [e.g. a web app, mobile application, AI tool] that [solves a specific problem or enhances user experience in a particular way].
+RESIKLO is an AI-driven waste reduction and tracking platform designed to make sustainable living effortless and engaging. Using an AI-powered waste scanner, users can upload photos of waste, and the system will identify the best disposal method based on type and confidence level, using YOLO for object detection. Users can track their personal waste reduction score over time, compete on leaderboards, and participate in social challenges, much like Strava. Additionally, Resiklo AI can partner with organizations and businesses to offer rewards—such as vouchers or discounts—in exchange for waste contributions, like collecting 50 used 500ml water bottles for exclusive perks, making sustainability more rewarding.
 
-### Key Objectives
+### Functional Requirements
 
-🔑 Objective 1 (e.g. "Make it easier for users to manage tasks using AI.")
+🔑 The system must accept images taken from the camera directly.
 
-🔑 Objective 2 (e.g. "Provide a seamless cross-platform experience.")
+🔑 The system must calculate a waste reduction score based on waste type, confidence level, and unit count.
 
-🔑 Objective 3 (e.g. "Ensure high performance and accessibility.")
+🔑 The leaderboard must update in real-time based on users’ waste contributions.
+
+🔑 The rewards system must track waste submissions and integrate with partnered businesses for voucher distribution.
 
 ## 📂 Repository Contents Overview
 
@@ -34,9 +36,10 @@ This repository contains the source code, documentation, and necessary resources
 
 ## 🚀 Features
 
-- ❓ **Feature 1** - Sample Feature Block.
-- ❓ **Feature 2** - Sample Feature Block.
-- ❓ **Feature 3** – Sample Feature Block.
+- 🤖 **AI-Powered Waste Scanner** - Users can upload a photo, and AI can suggests the best disposal method.
+- ♻️ **Waste Reduction Score** - Tracks and visualizes a user’s waste reduction progress.
+- 🏆 **Social Challenges & Leaderboards** – Users compete and share zero-waste achievements.
+- 🎫 **Rewards & Partnerships** – Users can exchange collected waste for vouchers or discounts.
 
 ## 🌍 Branching
 
@@ -46,6 +49,7 @@ We follow this git workflow:
 
 - `main` - Stable production-ready branch.
 - `dev` - Latest development updates.
+- `chore/{chore-name}` - Chore updates, mainly for README.
 
 ### **Backend Branches**
 
@@ -82,10 +86,13 @@ We follow this git workflow:
 
 ## ⚙️ Development Configurations
 
-- **Frontend:** To be decided.
-- **Backend:** To be decided.
-- **State Management:** To be decided.
-- **Authentication:** To be decided.
+- **Frontend:** React Native
+- **Backend:** FastAPI
+- **Database:** Firebase
+- **Cloud Functions:** Firebase
+- **Authentication:** Firebase
+- **Image Processing:** OpenCV
+- **AI Waste Detection:** YOLOv5
 
 ## 🤖 Running Tests
 
