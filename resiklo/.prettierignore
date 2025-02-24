@@ -1,0 +1,10 @@
+
+# config files
+tsconfig.json
+app.json
+metro.config.js
+tailwind.config.js
+babel.config.js
+
+# env files
+nativewind-env.d.ts
