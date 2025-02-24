@@ -8,7 +8,8 @@ from fastapi import FastAPI, UploadFile, File, HTTPException
 from PIL import Image
 
 app = FastAPI()
-
+API_KEY = os.getenv('API_KEY')
+URL = os.getenv('URL')
 model = yolov5.load('keremberke/yolov5m-garbage')
 
 # set model parameters
