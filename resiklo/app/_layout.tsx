@@ -8,7 +8,7 @@ import 'react-native-reanimated';
 
 import { useColorScheme } from '@/components/useColorScheme';
 
-import { verifyInstallation } from 'nativewind';
+import { roboto, montserrat, zain } from '@/constants/fonts';
 import '../global.css';
 
 export {
@@ -18,7 +18,7 @@ export {
 
 export const unstable_settings = {
   // Ensure that reloading on `/modal` keeps a back button present.
-  initialRouteName: '(tabs)'
+  initialRouteName: '(onboarding)/index'
 };
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -26,7 +26,9 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    ...roboto,
+    ...montserrat,
+    ...zain,
     ...FontAwesome.font
   });
 
@@ -53,9 +55,8 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(onboarding)/index" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );
