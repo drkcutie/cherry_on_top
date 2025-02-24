@@ -1,4 +1,4 @@
-# 🍒 Cherry On Top - KOMSAI 2025 Hackathon Team
+# 🍒 Cherry On Top - KOMSAI 2025 Hackathon Team (RESIKLO)
 
 I'm the cherry on top, cherry on top!
 
@@ -32,7 +32,7 @@ RESIKLO is an AI-driven waste reduction and tracking platform designed to make s
 
 This repository contains the source code, documentation, and necessary resources for SariSmart. The key directories and files include:
 
-- `frontend` - React Native frontend directory.
+- `resiklo` - React Native project directory.
 - `README.md` - Project overview and setup instructions.
 
 ## 🚀 Features
@@ -68,7 +68,7 @@ We follow this git workflow:
 
 ## 🛠️ Installation Guide
 
-> **Prerequisite:**
+> **Prerequisite:** Node.js v22 or higher
 
 ### Steps:
 
@@ -79,28 +79,39 @@ We follow this git workflow:
    cd cherry_on_top
    ```
 
-2. Install dependencies (Sample Step):
+2. Install frontend dependencies:
 
    ```sh
-     npm install
+   cd resiklo
+   npm install
    ```
+
+3. Run expo on preferred device
+
+   - For Android
+
+     ```sh
+     npm run android
+     ```
+
+   - For IOS
+
+     ```sh
+     npm run ios
+     ```
 
 ## ⚙️ Development Configurations
 
 - **Frontend:** React Native
+- **Styles:** NativeWind
 - **Backend:** FastAPI
-- **Database:** Firebase
-- **Cloud Functions:** Firebase
-- **Authentication:** Firebase
+- **Database:** Supabase
+- **Cloud Functions:** Supabase
+- **Authentication:** Supabase
 - **Image Processing:** OpenCV
 - **AI Waste Detection:** YOLOv5
+- **Environment Variables:**
 
-## 🤖 Running Tests
-
-To run tests, run the following command
-
-```bash
-  npm run test
-```
+  - The system requires a `.env` file to store API keys and sensitive configurations.
 
 ## 📸 Screenshots
