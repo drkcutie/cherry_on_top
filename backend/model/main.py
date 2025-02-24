@@ -1,8 +1,10 @@
 import io
+import os
 import uuid
-
+import httpx
 import yolov5
-from fastapi import FastAPI, UploadFile, File
+
+from fastapi import FastAPI, UploadFile, File, HTTPException
 from PIL import Image
 
 app = FastAPI()
@@ -18,7 +20,6 @@ model.max_det = 1000  # maximum number of detections per image
 
 # class names
 class_names = model.names
-
 
 @app.post("/detect/")
 async def detect_objects(file: UploadFile = File(...)) -> []:
@@ -46,3 +47,37 @@ async def detect_objects(file: UploadFile = File(...)) -> []:
     # result.save(save_dir='/images')
 
     return detections if detections else "No object found"
+
+@app.post('/suggest/')
+async def suggest(waste_type: str, trash_type: str) :
+    if not API_KEY:
+        return {"error": "Missing API Key"}
+
+    print("API_KEY: " , API_KEY)
+    header = {
+        "Authorization": f"Bearer {API_KEY}",
+        "Content-Type": "application/json"
+    }
+
+    payload = {
+        "inputs": {
+            "waste_type": waste_type,
+            "trash_type": trash_type
+        },
+        "response_mode": "blocking",
+        "user": "admin"
+    }
+    async with httpx.AsyncClient() as client:
+        response = await client.post(URL, headers=header, json=payload)
+
+    print(f"Response Status: {response.status_code}")
+    print(f"Response Content: {response.text}")
+
+    # Handle non-200 responses
+    if response.status_code != 200:
+        raise HTTPException(status_code=response.status_code, detail=f"API error: {response.text}")
+
+    try:
+        return response.json()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Invalid JSON response: {response.text}")
