@@ -3,9 +3,15 @@ import os
 import uuid
 import httpx
 import yolov5
+from dotenv import load_dotenv
 
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from PIL import Image
+
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
+URL = os.getenv("URL")
 
 app = FastAPI()
 
