@@ -1,125 +1,178 @@
-import InputField from '@/components/InputField';
-import { Link } from 'expo-router';
-import { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, Pressable } from 'react-native';
-import { z } from 'zod';
-
-const userSchema = z.object({
-  firstName: z.string().min(1, 'First name is required'),
-  lastName: z.string().min(1, 'Last name is required'),
-  email: z.string().email('Invalid email address'),
-  password: z.string().min(8, 'Password must be at least 8 characters'),
-  confirmPassword: z.string().min(8, 'Confirm password must be at least 8 characters')
-}).refine(data => data.password === data.confirmPassword, {
-  message: "Passwords don't match",
-  path: ['confirmPassword'],
-});
-
-interface UserInfo {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
+import {Text, View, TextInput, Button, Alert, SafeAreaView, Pressable} from 'react-native';
+import {useForm, Controller} from "react-hook-form";
+import React, {useState} from 'react';
+import {Eye, Lock, LucideMail} from "lucide-react-native";
+import ForgotPassword from "@/app/(auth)/forgot-password";
+import {Link} from "expo-router";
 
 export default function SignUpScreen() {
-  const [userInfo, setUserInfo] = useState<UserInfo>({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
+    const {control, handleSubmit, formState: {errors}} = useForm({
+        defaultValues: {
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            confirm_password: ''
+        }
+    });
+    const [passwordVisible, setPasswordIsNotVisible] = useState(true)
 
-  const updateUserInfo = (key: keyof UserInfo, val: string) => {
-    setUserInfo((prev) => ({
-      ...prev,
-      [key]: val
-    }));
-  };
+    const [confirmPasswordVisible, setConfirmPasswordNotVisible] = useState(true)
 
-  const handleSignUp = () => {
-    const result = userSchema.safeParse(userInfo);
-    if (!result.success) {
-      console.error(result.error.format());
-      return;
+    const onSubmit = (data: any) => {
+        console.log(data.firstName)
+        console.log(data.lastName)
     }
 
-    // Handle sign-up logic
-    console.log('User information is valid:', userInfo);
-  };
 
-  return (
-    <SafeAreaView className="h-screen-safe flex w-screen flex-col items-center justify-center gap-12 px-8 py-4 ">
-      <Text className="font-montserrat-semi-bold text-3xl text-gray">Sign Up for Resi{""}
-        <Text className="font-montserrat-semi-bold text-3xl text-darthmouth">klo </Text>
-      </Text>
-      <View className="flex w-full flex-col gap-8 p-10">
-        <View>
-          <InputField
-            label={'First Name'}
-            value={userInfo.firstName}
-            onChange={(e) => {
-              updateUserInfo('firstName', e);
-            }}
-            keyboardType="default"
-            textContentType="givenName"
-            secureTextEntry={false}
-          />
-          <InputField
-            label={'Last Name'}
-            value={userInfo.lastName}
-            onChange={(e) => {
-              updateUserInfo('lastName', e);
-            }}
-            keyboardType="default"
-            textContentType="familyName"
-            secureTextEntry={false}
-          />
-        </View>
+    return (
+        <SafeAreaView className='m-auto flex flex-col justify-start  items-center gap-20 '>
 
-        <InputField
-          label={'Email Address'}
-          value={userInfo.email}
-          onChange={(e) => {
-            updateUserInfo('email', e);
-          }}
-          keyboardType="email-address"
-          textContentType="emailAddress"
-          secureTextEntry={false}
-        />
+            <Text className="font-montserrat-semi-bold text-3xl text-gray">Signup to Resi{""}
+                <Text className="font-montserrat-semi-bold text-3xl text-darthmouth">klo</Text>
+            </Text>
+            <View className='flex flex-col gap-10'>
+                <View className='flex flex-row gap-2'>
+                    <View>
+                        <Text className='text-black text-sm font-roboto-light mb-1'>First Name</Text>
+                        <Controller
+                            control={control}
+                            rules={{
+                                required: true,
+                            }}
+                            render={({field: {onChange, onBlur, value}}) => (
+                                <TextInput
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    className=' border-jet  border rounded  min-w-48 min-h-12 p-2'
+                                />
+                            )}
+                            name="firstName"
+                        />
+                        {errors.firstName && <Text>This is required.</Text>}
+                    </View>
 
-        <InputField
-          label={'Password'}
-          value={userInfo.password}
-          onChange={(e) => {
-            updateUserInfo('password', e);
-          }}
-          keyboardType="default"
-          textContentType="password"
-          secureTextEntry={true}
-        />
+                    <View>
+                        <Text className='text-black text-sm font-roboto-light mb-1'>Last Name</Text>
+                        <Controller
+                            control={control}
+                            rules={{
+                                maxLength: 100,
+                            }}
+                            render={({field: {onChange, onBlur, value}}) => (
+                                <TextInput
+                                    onBlur={onBlur}
+                                    onChangeText={onChange}
+                                    value={value}
+                                    className='border border-jet rounded  min-w-48 min-h-12 p-2'
+                                />
+                            )}
+                            name="lastName"
+                        />
 
-        <InputField
-          label={'Confirm Password'}
-          value={userInfo.confirmPassword}
-          onChange={(e) => {
-            updateUserInfo('confirmPassword', e);
-          }}
-          keyboardType="default"
-          textContentType="password"
-          secureTextEntry={true}
-        />
-      </View>
-      <View className="flex w-full flex-col items-center gap-4">
-        <Pressable className="w-full rounded-full bg-darthmouth py-4" onPress={handleSignUp}>
-          <Text className="text-center font-montserrat-medium text-white">Sign Up</Text>
-        </Pressable>
-        <Link href={'/(auth)/login'} className="font-roboto-regular text-jet">
-          Already have an account? <Text className="font-roboto-medium text-darthmouth">Login</Text>
-        </Link>
-      </View>
-    </SafeAreaView>
-  );
+                    </View>
+                </View>
+                <View>
+                    <Text className='text-black text-sm font-roboto-light mb-1'>Email</Text>
+                    <View className="grid grid-rows-2">
+                        <View className="flex-row items-center border border-jet rounded min-w-48 min-h-12 ">
+                            <View className="border-r-2 border-gray-500 p-3">
+                                <LucideMail color={"#2E2E2E"} size={20}/>
+                            </View>
+                            <Controller
+                                control={control}
+                                rules={{maxLength: 100}}
+                                render={({field: {onChange, onBlur, value}}) => (
+                                    <TextInput
+                                        onBlur={onBlur}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        className="flex-1 text-base text-black p-2"
+                                    />
+                                )}
+                                name="email"
+                            />
+                        </View>
+                    </View>
+
+
+                </View>
+                <View>
+                    <Text className='text-black text-sm font-roboto-light mb-1'>Password</Text>
+                    <View className="grid grid-rows-2">
+                        <View className="flex-row items-center border border-jet rounded min-w-48 min-h-12 ">
+                            <View className="border-r-2 border-gray-500 p-3">
+                                <Lock color={"#2E2E2E"} size={20}/>
+                            </View>
+                            <Controller
+                                control={control}
+                                rules={{maxLength: 100}}
+                                render={({field: {onChange, onBlur, value}}) => (
+                                    <TextInput
+                                        onBlur={onBlur}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        className="flex-1 text-base text-black p-2"
+                                        placeholder=""
+                                        secureTextEntry={passwordVisible}
+                                    />
+                                )}
+                                name="password"
+                            />
+                            <Pressable onPressIn={() => setPasswordIsNotVisible(false)}
+                                       onPressOut={() => setPasswordIsNotVisible(true)}
+
+                                       className="self-center p-2">
+                                <Eye color={"#2E2E2E"} size={20}/>
+                            </Pressable>
+
+                        </View>
+                    </View>
+                </View>
+                <View>
+                    <Text className='text-black text-sm font-roboto-light mb-1'>Confirm Password</Text>
+                    <View className="grid grid-rows-2">
+                        <View className="flex-row items-center border border-jet rounded min-w-48 min-h-12 ">
+                            <View className="border-r-2 border-gray-500 p-3">
+                                <Lock color={"#2E2E2E"} size={20}/>
+                            </View>
+                            <Controller
+                                control={control}
+                                rules={{maxLength: 100}}
+                                render={({field: {onChange, onBlur, value}}) => (
+                                    <TextInput
+                                        onBlur={onBlur}
+                                        onChangeText={onChange}
+                                        value={value}
+                                        className="flex-1 text-base text-black p-2"
+                                        placeholder=""
+                                        secureTextEntry={confirmPasswordVisible}
+                                    />
+                                )}
+                                name="confirm_password"
+                            />
+                            <Pressable onPressIn={() => setConfirmPasswordNotVisible(false)}
+                                       onPressOut={() => setConfirmPasswordNotVisible(true)}
+                                       className="self-center p-2">
+                                <Eye color={"#2E2E2E"} size={20}/>
+                            </Pressable>
+                        </View>
+                    </View>
+                </View>
+                <Pressable onPress={handleSubmit(onSubmit)}
+                           className='self-center rounded-full  bg-darthmouth pl-12 pr-12 p-5   '>
+                    <Text className='text-white text-2xl font-montserrat-medium'>Create Account</Text>
+                </Pressable>
+                <Text className='self-center'>
+                    Already have an account? {" "}
+                    <Link href={"/(auth)/login"} className='font-darthmouth'>
+                       <Text className='text-darthmouth font-bold'>Login</Text>
+                </Link>
+                </Text>
+
+            </View>
+        </SafeAreaView>
+
+    );
 }
