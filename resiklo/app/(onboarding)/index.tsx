@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text, View, Pressable } from 'react-native';
+import { Text, View, Pressable, SafeAreaView } from 'react-native';
 import ResikloWord from '@/components/svgs/ResikloWord';
 import MobileHand from '@/components/svgs/MobileHand';
 import Animated, {
@@ -10,6 +10,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import Smiley from '@/components/svgs/Smiley';
 import Mushroom from '@/components/svgs/Mushroom';
+import { Link } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Static data for each onboarding screen
 const onboardingScreens = [
@@ -34,12 +36,6 @@ const onboardingScreens = [
 // changing title, image, and descs for each onboarding
 // screen.
 
-// NOTE: in Figma, specific words are highlighted in title
-// but I can't figure out how to do it dynamically here.
-
-// TODO: Add redirect to auth once ready
-// TODO: Add async storage so user only onboards once
-
 export default function OnboardingScreen() {
   const [pageIndex, setPageIndex] = useState(0);
   const progress = useSharedValue(0);
@@ -62,8 +58,16 @@ export default function OnboardingScreen() {
       backgroundColor: pageIndex === index ? '#1D6742' : '#2E2E2E'
     }));
 
+  const handleViewedOnboarding = async () => {
+    try {
+      await AsyncStorage.setItem('@viewedOnboarding', 'true');
+    } catch (e) {
+      console.error('Error @handleViewedOnboarding: ', e);
+    }
+  };
+
   return (
-    <View className="h-screen-safe flex w-screen flex-col items-center justify-center gap-20">
+    <SafeAreaView className="h-screen-safe flex w-screen flex-col items-center justify-center gap-20">
       <View className="flex flex-col items-center justify-center gap-8">
         <Animated.View entering={FadeIn.duration(500)} className="mb-20">
           <ResikloWord />
@@ -84,7 +88,7 @@ export default function OnboardingScreen() {
       </View>
 
       <View className="flex flex-col gap-6 px-16">
-        <Text className="font-montserrat-bold text-center text-2xl">
+        <Text className="text-center font-montserrat-bold text-2xl text-darthmouth">
           {onboardingScreens[pageIndex].title}
         </Text>
         <Text className="text-center text-base text-neutral-500">
@@ -96,22 +100,29 @@ export default function OnboardingScreen() {
         {pageIndex < 2 ? (
           <>
             <Pressable className="px-12 py-4" onPress={handleSkip}>
-              <Text className="font-montserrat text-darthmouth text-lg">Skip</Text>
+              <Text className="font-montserrat text-lg text-darthmouth">Skip</Text>
             </Pressable>
-            <Pressable className="bg-darthmouth rounded-lg px-16 py-4" onPress={handleNext}>
+            <Pressable
+              className="rounded-lg bg-darthmouth px-16 py-4 active:opacity-80"
+              onPress={handleNext}
+            >
               <Text className="font-montserrat-bold text-lg text-white">Next</Text>
             </Pressable>
           </>
         ) : (
           <>
-            <Pressable className="bg-darthmouth w-full rounded-lg py-4" onPress={handleNext}>
-              <Text className="font-montserrat-bold text-center text-lg text-white">
+            <Link
+              className="w-full rounded-lg bg-darthmouth py-4"
+              href={'/(auth)/login'}
+              onPress={handleViewedOnboarding}
+            >
+              <Text className="text-center font-montserrat-bold text-lg text-white">
                 Let's get it!
               </Text>
-            </Pressable>
+            </Link>
           </>
         )}
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
