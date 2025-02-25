@@ -3,6 +3,7 @@ import { View, Text, TextInput, KeyboardTypeOptions, TextInputProps } from 'reac
 interface InputFieldProps {
   label: string;
   value: string;
+  icon?: JSX.Element;
   keyboardType?: KeyboardTypeOptions;
   textContentType?: TextInputProps['textContentType'];
   secureTextEntry?: boolean;
@@ -12,6 +13,7 @@ interface InputFieldProps {
 export default function InputField({
   label,
   value,
+  icon,
   onChange,
   keyboardType = 'default',
   secureTextEntry = false,
@@ -21,9 +23,13 @@ export default function InputField({
     <View className="flex w-full flex-col gap-1">
       <Text className="font-jet">{label}</Text>
       <View className="relative flex w-full flex-row rounded-md border border-neutral-400">
-        <View className="h-fit w-14 rounded-l-md border border-neutral-400" />
+        {icon && (
+          <View className="justify-center rounded-l-md border-r border-neutral-400 px-4">
+            {icon}
+          </View>
+        )}
         <TextInput
-          className="flex-1 px-4"
+          className="h-14 w-full px-4 text-lg"
           keyboardType={keyboardType}
           secureTextEntry={secureTextEntry}
           textContentType={textContentType}
@@ -31,6 +37,8 @@ export default function InputField({
           autoCorrect={false}
           value={value}
           onChangeText={onChange}
+          multiline={false}
+          textAlignVertical="center"
         />
       </View>
     </View>
