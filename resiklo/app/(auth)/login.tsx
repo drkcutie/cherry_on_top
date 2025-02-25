@@ -57,7 +57,7 @@ export default function LoginScreen() {
         <Pressable className="w-full rounded-full bg-darthmouth py-4">
           <Text className="text-center font-montserrat-medium text-white">Login</Text>
         </Pressable>
-        <Link href={'/(auth)/login'} className="font-roboto-regular text-jet">
+        <Link href={'/(auth)/signup'} className="font-roboto-regular text-jet">
           Don't have an account? <Text className="font-roboto-medium text-darthmouth">Sign Up</Text>
         </Link>
       </View>

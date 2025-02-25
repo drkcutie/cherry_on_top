@@ -39,7 +39,8 @@
     "react-native-svg": "^15.11.2",
     "react-native-web": "~0.19.13",
     "resiklo": "file:",
-    "tailwindcss": "^3.4.17"
+    "tailwindcss": "^3.4.17",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
