@@ -1,3 +1,4 @@
+import { signInWithEmail } from '@/services/auth';
 import InputField from '@/components/InputField';
 import { Link } from 'expo-router';
 import { useState } from 'react';
@@ -22,6 +23,7 @@ export default function LoginScreen() {
   });
 
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [loading, setLoading] = useState(false);
 
   const updateUserInfo = (key: keyof UserInfo, val: string) => {
     setUserInfo((prev) => ({
@@ -30,7 +32,7 @@ export default function LoginScreen() {
     }));
   };
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const validation = loginSchema.safeParse(userInfo);
 
     if (!validation.success) {
@@ -43,6 +45,17 @@ export default function LoginScreen() {
     }
 
     setErrors({});
+    setLoading(true);
+
+    try {
+      await signInWithEmail(userInfo.email, userInfo.password);
+      console.log('Login successful');
+    } catch (error) {
+      console.error('Login failed: ', error);
+      setErrors({ email: 'Invalid email or password' });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -81,17 +94,14 @@ export default function LoginScreen() {
       </View>
 
       <View className="flex w-full flex-col items-center gap-4">
-        <Link
-          href={'/(auth)/forgot-password'}
-          className="ml-auto font-roboto-medium text-darthmouth"
-        >
-          Forgot Password?
-        </Link>
         <Pressable
           className="w-full rounded-full bg-darthmouth py-4 active:opacity-80"
           onPress={handleLogin}
+          disabled={loading}
         >
-          <Text className="text-center font-montserrat-medium text-white">Login</Text>
+          <Text className="text-center font-montserrat-medium text-white">
+            {loading ? 'Logging in...' : 'Login'}
+          </Text>
         </Pressable>
         <Link href={'/(auth)/signup'} className="font-roboto-regular text-jet">
           Don't have an account? <Text className="font-roboto-medium text-darthmouth">Sign Up</Text>
