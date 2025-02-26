@@ -1,7 +1,7 @@
-import { signInWithEmail } from '@/services/auth';
+import { setSession, signInWithEmail } from '@/services/auth';
 import InputField from '@/components/InputField';
 import { Link, router } from 'expo-router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, SafeAreaView, Pressable, Switch, ActivityIndicator } from 'react-native';
 import { z } from 'zod';
 import { Lock, LucideMessageSquareWarning, Mail } from 'lucide-react-native';
@@ -48,9 +48,11 @@ export default function LoginScreen() {
     setLoading(true);
 
     try {
-      await signInWithEmail(userInfo.email, userInfo.password);
-      // Redirecting to home screen after logging in
-      router.replace('/(tabs)/home');
+      const session = await signInWithEmail(userInfo.email, userInfo.password, rememberMe);
+
+      if (session) {
+        router.replace('/(tabs)/home');
+      }
     } catch (error) {
       console.error('Login failed: ', error);
       setErrors('Invalid email or password');

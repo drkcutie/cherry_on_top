@@ -1,6 +1,8 @@
 import { Stack, router } from 'expo-router';
 import { useEffect, useState } from 'react';
+import * as SecureStore from 'expo-secure-store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { setSession } from '@/services/auth';
 
 export default function IndexScreen() {
   const [loading, setLoading] = useState(true);
@@ -21,10 +23,23 @@ export default function IndexScreen() {
     checkOnboarding();
   }, []);
 
+  // Automatic sign-in if access token is available
+  const checkUserSession = async () => {
+    const accessToken = await SecureStore.getItemAsync('access_token');
+    const refreshToken = await SecureStore.getItemAsync('refresh_token');
+
+    if (accessToken) {
+      await setSession(accessToken, refreshToken || '');
+      router.replace('/(tabs)/home');
+    } else {
+      router.replace('/(auth)/login');
+    }
+  };
+
   useEffect(() => {
     if (!loading) {
       if (viewedOnboarding) {
-        router.replace('/(auth)/login');
+        checkUserSession();
       } else {
         router.replace('/(onboarding)');
       }
