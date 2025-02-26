@@ -1,4 +1,5 @@
-import { View, Text, TextInput, KeyboardTypeOptions, TextInputProps } from 'react-native';
+import { useState } from 'react';
+import { View, TextInput, KeyboardTypeOptions, TextInputProps } from 'react-native';
 
 interface InputFieldProps {
   label: string;
@@ -15,32 +16,34 @@ export default function InputField({
   value,
   icon,
   onChange,
-  keyboardType = 'default',
-  secureTextEntry = false,
-  textContentType = 'none'
+  keyboardType,
+  secureTextEntry,
+  textContentType
 }: InputFieldProps) {
+  const [isFocused, setIsFocused] = useState(false);
+
   return (
-    <View className="flex w-full flex-col  gap-1">
-      <Text className="font-jet">{label}</Text>
-      <View className="relative flex w-full flex-row rounded-md border border-neutral-400">
-        {icon && (
-          <View className="justify-center rounded-l-md border-r border-neutral-400 px-4">
-            {icon}
-          </View>
-        )}
-        <TextInput
-          className="h-14 w-full px-4 text-lg"
-          keyboardType={keyboardType}
-          secureTextEntry={secureTextEntry}
-          textContentType={textContentType}
-          autoCapitalize="none"
-          autoCorrect={false}
-          value={value}
-          onChangeText={onChange}
-          multiline={false}
-          textAlignVertical="center"
-        />
-      </View>
+    <View
+      className={`relative flex w-full flex-row border border-neutral-400 px-4 ${
+        isFocused ? 'bg-neutral-50' : 'bg-white'
+      }`}
+    >
+      <TextInput
+        className="h-14 flex-1 text-lg"
+        placeholder={label}
+        keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
+        textContentType={textContentType}
+        autoCapitalize="none"
+        autoCorrect={false}
+        value={value}
+        onChangeText={onChange}
+        multiline={false}
+        textAlignVertical="center"
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+      />
+      {icon && <View className="justify-center border-neutral-400">{icon}</View>}
     </View>
   );
 }
