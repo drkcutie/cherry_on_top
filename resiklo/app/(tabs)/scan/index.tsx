@@ -28,9 +28,9 @@ export default function ScanScreen() {
   }
 
   return (
-    <SafeAreaView>
-      <CameraView facing={facing}>
-        <View>
+    <SafeAreaView className="h-screen-safe w-full">
+      <CameraView facing={facing} className="h-full w-full">
+        <View className="relative h-full w-full">
           <TouchableOpacity>
             <Text>Flip Camera</Text>
           </TouchableOpacity>
