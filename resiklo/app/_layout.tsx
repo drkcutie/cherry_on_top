@@ -48,37 +48,11 @@ export default function RootLayout() {
 
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
-  const [loading, setLoading] = useState(true);
-  const [viewedOnboarding, setViewedOnboarding] = useState(false);
-
-  const checkOnboarding = async () => {
-    try {
-      const val = await AsyncStorage.getItem('@viewedOnboarding');
-
-      setViewedOnboarding(val === 'true');
-    } catch (e) {
-      console.error('Error @checkOnboarding: ', e);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    checkOnboarding();
-  }, []);
-
-  if (loading) {
-    return null;
-  }
 
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack screenOptions={{ headerShown: false }}>
-        {viewedOnboarding ? (
-          <Stack.Screen name="(auth)/login" />
-        ) : (
-          <Stack.Screen name="(onboarding)/index" />
-        )}
+        <Stack.Screen name="index" />
       </Stack>
     </ThemeProvider>
   );
