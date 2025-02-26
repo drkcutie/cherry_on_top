@@ -1,6 +1,6 @@
 import { signInWithEmail } from '@/services/auth';
 import InputField from '@/components/InputField';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
 import { useState } from 'react';
 import { View, Text, SafeAreaView, Pressable } from 'react-native';
 import { z } from 'zod';
@@ -15,6 +15,8 @@ interface UserInfo {
   email: string;
   password: string;
 }
+
+const ROUTE_AFTER_LOGIN = '/';
 
 export default function LoginScreen() {
   const [userInfo, setUserInfo] = useState<UserInfo>({
@@ -49,7 +51,7 @@ export default function LoginScreen() {
 
     try {
       await signInWithEmail(userInfo.email, userInfo.password);
-      console.log('Login successful');
+      router.replace(ROUTE_AFTER_LOGIN);
     } catch (error) {
       console.error('Login failed: ', error);
       setErrors({ email: 'Invalid email or password' });
