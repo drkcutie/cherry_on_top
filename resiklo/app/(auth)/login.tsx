@@ -19,8 +19,6 @@ interface UserInfo {
   password: string;
 }
 
-const ROUTE_AFTER_LOGIN = '/(tabs)/scan';
-
 export default function LoginScreen() {
   const [userInfo, setUserInfo] = useState<UserInfo>({
     email: '',
@@ -51,7 +49,8 @@ export default function LoginScreen() {
 
     try {
       await signInWithEmail(userInfo.email, userInfo.password);
-      router.replace(ROUTE_AFTER_LOGIN);
+      // Redirecting to home screen after logging in
+      router.replace('/(tabs)/home');
     } catch (error) {
       console.error('Login failed: ', error);
       setErrors('Invalid email or password');

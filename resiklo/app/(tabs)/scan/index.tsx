@@ -4,7 +4,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { Pressable, View, Text, TouchableOpacity } from 'react-native';
 
 export default function ScanScreen() {
-  const [facing, setFacing] = useState('back');
+  const [facing, setFacing] = useState<'front' | 'back'>('back');
   const [permission, requestPermission] = useCameraPermissions();
 
   if (!permission) {

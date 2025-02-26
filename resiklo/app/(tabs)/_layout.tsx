@@ -1,63 +1,64 @@
-import React from 'react';
-import FontAwesome from '@expo/vector-icons/FontAwesome';
-import { Link, Tabs } from 'expo-router';
-import { Pressable, View } from 'react-native';
+import { Tabs } from 'expo-router';
+import { House, Users, Smartphone, Trophy, UserRound } from 'lucide-react-native';
 
-import { useColorScheme } from '@/components/useColorScheme';
-import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { House, Smartphone, Trophy, User, UserRound } from 'lucide-react-native';
-
-// You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
+const FOCUSED_COLOR = '#1D6742'; // green
+const NOT_FOCUSED_COLOR = '#A3A3A3'; // neutral
 
 export default function TabLayout() {
-  const Tab = createBottomTabNavigator();
-
   return (
-    <View></View>
-    // <Tab.Navigator
-    //   screenOptions={{ tabBarActiveTintColor: 'green', tabBarInactiveTintColor: 'white' }}
-    // >
-    //   <Tab.Screen
-    //     name="Feed"
-    //     component={TabTwoScreen}
-    //     options={{
-    //       tabBarLabel: 'Home',
-    //       tabBarIcon: ({ focused }) => <House color={focused ? 'green' : 'white'} />
-    //     }}
-    //   />
-    //   <Tab.Screen
-    //     name="Socials"
-    //     component={TabTwoScreen}
-    //     options={{
-    //       tabBarLabel: 'Socials',
-    //       tabBarIcon: ({ focused }) => <UserRound color={focused ? 'green' : 'white'} />
-    //     }}
-    //   />
-    //   <Tab.Screen
-    //     name="Scan"
-    //     component={TabTwoScreen}
-    //     options={{
-    //       tabBarLabel: 'Scan',
-    //       tabBarIcon: ({ focused }) => <Smartphone color={focused ? 'green' : 'white'} />
-    //     }}
-    //   />
-    //   <Tab.Screen
-    //     name="Rewards"
-    //     component={TabTwoScreen}
-    //     options={{
-    //       tabBarLabel: 'Rewards',
-    //       tabBarIcon: ({ focused }) => <Trophy color={focused ? 'green' : 'white'} />
-    //     }}
-    //   />
-    //   <Tab.Screen
-    //     name="Account"
-    //     component={TabTwoScreen}
-    //     options={{
-    //       tabBarLabel: 'Account',
-    //       tabBarIcon: ({ focused }) => <User color={focused ? 'green' : 'white'} />
-    //     }}
-    //   />
-    // </Tab.Navigator>
+    <Tabs
+      screenOptions={{
+        tabBarActiveTintColor: FOCUSED_COLOR,
+        tabBarInactiveTintColor: NOT_FOCUSED_COLOR,
+        headerShown: false
+      }}
+    >
+      {/* Home */}
+      <Tabs.Screen
+        name="home/index"
+        options={{
+          tabBarLabel: 'Home',
+          tabBarIcon: ({ focused }) => <House color={focused ? FOCUSED_COLOR : NOT_FOCUSED_COLOR} />
+        }}
+      />
+      {/* Socials */}
+      <Tabs.Screen
+        name="socials/index"
+        options={{
+          tabBarLabel: 'Socials',
+          tabBarIcon: ({ focused }) => <Users color={focused ? FOCUSED_COLOR : NOT_FOCUSED_COLOR} />
+        }}
+      />
+      {/* Scan */}
+      <Tabs.Screen
+        name="scan/index"
+        options={{
+          tabBarLabel: 'Scan',
+          tabBarIcon: ({ focused }) => (
+            <Smartphone color={focused ? FOCUSED_COLOR : NOT_FOCUSED_COLOR} />
+          )
+        }}
+      />
+      {/* Rewards */}
+      <Tabs.Screen
+        name="rewards/index"
+        options={{
+          tabBarLabel: 'Rewards',
+          tabBarIcon: ({ focused }) => (
+            <Trophy color={focused ? FOCUSED_COLOR : NOT_FOCUSED_COLOR} />
+          )
+        }}
+      />
+      {/* Account */}
+      <Tabs.Screen
+        name="account/index"
+        options={{
+          tabBarLabel: 'Account',
+          tabBarIcon: ({ focused }) => (
+            <UserRound color={focused ? FOCUSED_COLOR : NOT_FOCUSED_COLOR} />
+          )
+        }}
+      />
+    </Tabs>
   );
 }
