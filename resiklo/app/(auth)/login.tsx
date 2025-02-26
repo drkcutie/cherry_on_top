@@ -1,6 +1,6 @@
 import { signInWithEmail } from '@/services/auth';
 import InputField from '@/components/InputField';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 import { useState } from 'react';
 import { View, Text, SafeAreaView, Pressable } from 'react-native';
 import { z } from 'zod';
@@ -24,6 +24,8 @@ export default function LoginScreen() {
 
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const [loading, setLoading] = useState(false);
+
+  const router = useRouter();
 
   const updateUserInfo = (key: keyof UserInfo, val: string) => {
     setUserInfo((prev) => ({
@@ -49,7 +51,7 @@ export default function LoginScreen() {
 
     try {
       await signInWithEmail(userInfo.email, userInfo.password);
-      console.log('Login successful');
+      router.replace('/(tabs)/scan');
     } catch (error) {
       console.error('Login failed: ', error);
       setErrors({ email: 'Invalid email or password' });
@@ -104,7 +106,10 @@ export default function LoginScreen() {
           </Text>
         </Pressable>
         <Text className="font-roboto-regular text-jet">
-          Don't have an account? <Link href={'/(auth)/signup'} className="font-roboto-medium text-darthmouth">Sign Up</Link>
+          Don't have an account?{' '}
+          <Link href={'/(auth)/signup'} className="font-roboto-medium text-darthmouth">
+            Sign Up
+          </Link>
         </Text>
       </View>
     </SafeAreaView>

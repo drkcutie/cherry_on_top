@@ -28,7 +28,12 @@
       "favicon": "./assets/images/favicon.png"
     },
     "plugins": [
-      "expo-router"
+      "expo-router", [
+        "expo-camera",
+        {
+          "cameraPermissions": "Allow Resiklo to access your camera for waste scanning."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

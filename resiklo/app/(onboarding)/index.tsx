@@ -117,7 +117,7 @@ export default function OnboardingScreen() {
               onPress={handleViewedOnboarding}
             >
               <Text className="text-center font-montserrat-bold text-lg text-white">
-                Let's get it!
+                Let's get started!
               </Text>
             </Link>
           </>
