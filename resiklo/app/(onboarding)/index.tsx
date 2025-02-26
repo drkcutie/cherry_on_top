@@ -67,10 +67,10 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <SafeAreaView className="h-screen-safe flex w-screen flex-col items-center justify-center gap-20">
+    <SafeAreaView className="h-screen-safe flex w-screen flex-col items-center gap-20 py-12">
       <View className="flex flex-col items-center justify-center gap-8">
-        <Animated.View entering={FadeIn.duration(500)} className="mb-20">
-          <ResikloWord />
+        <Animated.View entering={FadeIn.duration(500)} className="mb-14">
+          <ResikloWord width="225" height="125" />
         </Animated.View>
         <Animated.View entering={FadeIn.duration(500)}>
           {onboardingScreens[pageIndex].image}
