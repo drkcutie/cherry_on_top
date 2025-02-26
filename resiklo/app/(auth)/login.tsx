@@ -19,7 +19,7 @@ interface UserInfo {
   password: string;
 }
 
-const ROUTE_AFTER_LOGIN = '/';
+const ROUTE_AFTER_LOGIN = '/(tabs)/scan';
 
 export default function LoginScreen() {
   const [userInfo, setUserInfo] = useState<UserInfo>({
@@ -129,9 +129,13 @@ export default function LoginScreen() {
             onPress={handleLogin}
             disabled={loading}
           >
-            <Text className="text-center font-montserrat-bold text-xl uppercase tracking-wide text-white">
-              {loading ? <ActivityIndicator /> : 'Log In'}
-            </Text>
+            {loading ? (
+              <ActivityIndicator />
+            ) : (
+              <Text className="text-center font-montserrat-bold text-xl uppercase tracking-wide text-white">
+                {loading ? '' : 'Log In'}
+              </Text>
+            )}
           </Pressable>
           <View className="my-4 flex-row items-center">
             <View className="h-[1px] flex-1 bg-neutral-300" />
@@ -143,10 +147,16 @@ export default function LoginScreen() {
             onPress={handleLogin}
             disabled={loading}
           >
-            {!loading && <GoogleIcon width="24" height="24" />}
-            <Text className="items-center text-center font-montserrat-bold text-lg uppercase tracking-wide text-neutral-600">
-              {loading ? <ActivityIndicator /> : 'Continue With Google'}
-            </Text>
+            {loading ? (
+              <ActivityIndicator />
+            ) : (
+              <>
+                <GoogleIcon width="24" height="24" />
+                <Text className="items-center text-center font-montserrat-bold text-lg uppercase tracking-wide text-neutral-600">
+                  {loading ? '' : 'Continue With Google'}
+                </Text>
+              </>
+            )}
           </Pressable>
           <View className="my-4 flex flex-col items-center gap-8">
             <Link
