@@ -93,9 +93,9 @@ export default function LoginScreen() {
         >
           <Text className="text-center font-montserrat-medium text-white">Login</Text>
         </Pressable>
-        <Link href={'/(auth)/signup'} className="font-roboto-regular text-jet">
-          Don't have an account? <Text className="font-roboto-medium text-darthmouth">Sign Up</Text>
-        </Link>
+        <Text className="font-roboto-regular text-jet">
+          Don't have an account? <Link href={'/(auth)/signup'} className="font-roboto-medium text-darthmouth">Sign Up</Link>
+        </Text>
       </View>
     </SafeAreaView>
   );

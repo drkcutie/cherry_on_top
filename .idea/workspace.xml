@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="efc6774c-7259-49a9-8343-f0df78e3d9c8" name="Changes" comment="signup WIP">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resiklo/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/resiklo/package.json" afterDir="false" />
+    <list default="true" id="efc6774c-7259-49a9-8343-f0df78e3d9c8" name="Changes" comment="add signup.tsx">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resiklo/app/(auth)/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/resiklo/app/(auth)/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resiklo/app/(auth)/signup.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/resiklo/app/(auth)/signup.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,20 +56,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;frontend/dev&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/derrickbinangbang/Documents/Code Projects/cherry_on_top/resiklo/node_modules/typescript/lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "frontend/feature/signup",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "configurable.tailwindcss",
+    "ts.external.directory.path": "/Users/derrickbinangbang/Documents/Code Projects/cherry_on_top/resiklo/node_modules/typescript/lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="ReactDesignerToolWindowState">
     <option name="myId2Visible">
       <map>
@@ -110,7 +109,8 @@
       <workItem from="1740327982614" duration="1665000" />
       <workItem from="1740330965880" duration="60000" />
       <workItem from="1740404543066" duration="2208000" />
-      <workItem from="1740416256076" duration="18031000" />
+      <workItem from="1740416256076" duration="19458000" />
+      <workItem from="1740492584821" duration="6046000" />
     </task>
     <task id="LOCAL-00001" summary="added bottom navigations">
       <option name="closed" value="true" />
@@ -128,7 +128,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740490954035</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="resolved merge conflicts">
+      <option name="closed" value="true" />
+      <created>1740491183506</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1740491183506</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -148,7 +156,9 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="added bottom navigations" />
     <MESSAGE value="signup WIP" />
-    <option name="LAST_COMMIT_MESSAGE" value="signup WIP" />
+    <MESSAGE value="resolved merge conflicts" />
+    <MESSAGE value="add signup.tsx" />
+    <option name="LAST_COMMIT_MESSAGE" value="add signup.tsx" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -156,7 +166,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/resiklo/app/(onboarding)/index.tsx</url>
           <line>22</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
