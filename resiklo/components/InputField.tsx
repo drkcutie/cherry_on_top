@@ -20,7 +20,7 @@ export default function InputField({
   textContentType = 'none'
 }: InputFieldProps) {
   return (
-    <View className="flex w-full flex-col gap-1">
+    <View className="flex w-full flex-col  gap-1">
       <Text className="font-jet">{label}</Text>
       <View className="relative flex w-full flex-row rounded-md border border-neutral-400">
         {icon && (
