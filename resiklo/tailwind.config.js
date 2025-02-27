@@ -8,6 +8,7 @@ module.exports = {
         darthmouth: '#1D6742',
         malachite: '#48E27B',
         jet: '#2E2E2E',
+        facebook:'#3B579D'
       },
       fontFamily: {
         'montserrat-regular': ['MontserratRegular', 'sans-serif'],

@@ -19,8 +19,6 @@ export default function HomeScreen() {
 
   return (
     <SafeAreaView>
-      <Text>This is the Home Screen</Text>
-      <Text>This is your email: {userEmail}</Text>
     </SafeAreaView>
   );
 }

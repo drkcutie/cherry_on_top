@@ -62,7 +62,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView className="h-screen-safe w-full bg-white">
+    <SafeAreaView className="w-full bg-white h-full">
       <View className="flex h-full w-full flex-col items-center gap-8 px-8 py-12">
         <View className="flex w-full flex-col items-center">
           <Animated.View entering={FadeIn.duration(500)}>
@@ -145,7 +145,7 @@ export default function LoginScreen() {
           </View>
           <Pressable
             className="flex w-full flex-row items-center justify-center gap-4 rounded-full bg-white py-4 shadow-md active:opacity-80"
-            onPress={handleLogin}
+            onPress={() => router.replace('/(tabs)/home')}
             disabled={loading}
           >
             {loading ? (
