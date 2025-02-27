@@ -115,7 +115,7 @@ export default function OnboardingScreen() {
           </>
         ) : (
           <>
-            <View className="w-full overflow-hidden rounded-lg">
+            <View className="overflow-hidden rounded-lg">
               <LinearGradient
                 colors={['#1D6742', '#3ACD83']}
                 start={{ x: 0, y: 0 }}
