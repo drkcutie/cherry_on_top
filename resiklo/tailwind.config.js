@@ -8,7 +8,11 @@ module.exports = {
         darthmouth: '#1D6742',
         malachite: '#48E27B',
         jet: '#2E2E2E',
-        facebook:'#3B579D'
+        facebook:'#3B579D',
+        mint: '#3ACD83'
+      },
+      backgroundImage: {
+        'gradient-dartmouth-mint': 'linear-gradient(to right, #1D6742, #3ACD83)',
       },
       fontFamily: {
         'montserrat-regular': ['MontserratRegular', 'sans-serif'],
