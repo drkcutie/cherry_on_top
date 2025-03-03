@@ -1,9 +1,13 @@
-import { SafeAreaView, Text } from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 
 export default function AccountScreen() {
   return (
     <SafeAreaView>
-      <Text>This is the Account Screen</Text>
+        <View className='flex flex-col justify-center items-center'>
+            <Text>This is the Account Screen{""}
+            </Text>
+        </View>
+
     </SafeAreaView>
   );
 }

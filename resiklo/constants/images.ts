@@ -1,4 +1,4 @@
-const IMAGE_LENGTH = 20; // Ensure this matches the actual number of images per category
+const IMAGE_LENGTH = 20;
 
 const taskImages: Record<string, any[]> = {
     plastic: Array.from({ length: IMAGE_LENGTH }, (_, i) =>
@@ -17,6 +17,8 @@ const taskImages: Record<string, any[]> = {
         require(`@/assets/images/trash_type/cardboard/${i + 1}.png`)
     ),
 };
+
+
 
 export const getRandomizedImageWithType = (taskType: string) => {
     const images = taskImages[taskType];

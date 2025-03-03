@@ -1,9 +1,9 @@
 import { SafeAreaView, Text } from 'react-native';
+import Reward from "@/components/RewardPoints";
 
 export default function SocialScreen() {
   return (
     <SafeAreaView>
-      <Text>This is the Socials Screen</Text>
     </SafeAreaView>
   );
 }
