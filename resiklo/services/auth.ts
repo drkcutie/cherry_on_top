@@ -10,9 +10,25 @@ export const signInWithEmail = async (email: string, password: string, remember:
     throw error;
   }
 
-  if (data.session && remember) {
-    await SecureStore.setItemAsync('access_token', data.session.access_token);
-    await SecureStore.setItemAsync('refresh_token', data.session.refresh_token);
+  if (data.session) {
+    const userId = data.user?.id;
+
+    const { data: userInfo, error: userError } = await supabase
+      .from('user_info')
+      .select('*')
+      .eq('uid', userId)
+      .single();
+
+    if (userError) {
+      console.error('Error fetching user info:', userError);
+    } else {
+      await SecureStore.setItemAsync('user_info', JSON.stringify(userInfo));
+    }
+
+    if (remember) {
+      await SecureStore.setItemAsync('access_token', data.session.access_token);
+      await SecureStore.setItemAsync('refresh_token', data.session.refresh_token);
+    }
   }
 
   return data.session;
@@ -38,6 +54,11 @@ export const signUpWithEmail = async (
     console.warn('Please check your inbox for email verification!');
   }
 
+  if (data.session) {
+    await SecureStore.setItemAsync('access_token', data.session.access_token);
+    await SecureStore.setItemAsync('refresh_token', data.session.refresh_token);
+  }
+
   // User Info Object
   const userInfoObj = {
     uid: data.user?.id,
@@ -46,6 +67,8 @@ export const signUpWithEmail = async (
     email_address: email,
     image_url: ''
   };
+
+  await SecureStore.setItemAsync('user_info', JSON.stringify(userInfoObj));
 
   // create user
   await supabase.from('user_info').insert([userInfoObj]);

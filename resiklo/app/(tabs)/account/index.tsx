@@ -16,7 +16,7 @@ export default function AccountScreen() {
               dailyPoints={0}
               topPoints={0}
               streaks={0}
-            ></UserProfile>
+            />
           </View>
         </View>
       </ScrollView>
