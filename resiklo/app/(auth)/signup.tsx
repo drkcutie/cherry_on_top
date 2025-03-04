@@ -19,6 +19,7 @@ import ResikloWord from '@/components/svgs/ResikloWord';
 import { Image } from 'react-native';
 import { signUpWithEmail } from '@/services/auth';
 import { AuthError } from '@supabase/supabase-js';
+import { useUser } from '../provider';
 
 const signUpSchema = z
   .object({
@@ -34,6 +35,7 @@ const signUpSchema = z
   });
 
 export default function SignUpScreen() {
+  const { setUser } = useUser();
   const {
     control,
     handleSubmit,
@@ -79,7 +81,8 @@ export default function SignUpScreen() {
         data.email,
         data.password,
         data.firstName,
-        data.lastName
+        data.lastName,
+        setUser
       );
 
       if (error) {

@@ -10,6 +10,7 @@ import { useColorScheme } from '@/components/useColorScheme';
 
 import { roboto, montserrat, zain } from '@/constants/fonts';
 import '../global.css';
+import UserProvider from './provider';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -50,9 +51,11 @@ function RootLayoutNav() {
 
   return (
     <ThemeProvider value={DefaultTheme}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-      </Stack>
+      <UserProvider>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+        </Stack>
+      </UserProvider>
     </ThemeProvider>
   );
 }

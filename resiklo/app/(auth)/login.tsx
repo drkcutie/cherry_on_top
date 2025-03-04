@@ -10,6 +10,7 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import GoogleIcon from '@/components/svgs/GoogleIcon';
 import { LinearGradient } from 'expo-linear-gradient';
 import React from 'react';
+import { useUser } from '../provider';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -22,6 +23,7 @@ interface UserInfo {
 }
 
 export default function LoginScreen() {
+  const { setUser } = useUser();
   const [userInfo, setUserInfo] = useState<UserInfo>({
     email: '',
     password: ''
@@ -50,7 +52,7 @@ export default function LoginScreen() {
     setLoading(true);
 
     try {
-      const session = await signInWithEmail(userInfo.email, userInfo.password, rememberMe);
+      const session = await signInWithEmail(userInfo.email, userInfo.password, rememberMe, setUser);
 
       if (session) {
         router.replace('/(tabs)/home');

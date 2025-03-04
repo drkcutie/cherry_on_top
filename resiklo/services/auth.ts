@@ -1,17 +1,27 @@
 import { supabase } from '@/lib/supabase';
+import { useUser } from '@/app/provider';
 
 import * as SecureStore from 'expo-secure-store';
-
-export const signInWithEmail = async (email: string, password: string, remember: boolean) => {
+export const signInWithEmail = async (
+  email: string,
+  password: string,
+  remember: boolean,
+  setUser: (user: any) => void
+) => {
   const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
   if (error) {
-    console.error('Error @signInWithEmail: ', error);
+    console.error('Error @signInWithEmail:', error);
     throw error;
   }
 
   if (data.session) {
     const userId = data.user?.id;
+
+    if (remember) {
+      await SecureStore.setItemAsync('access_token', data.session.access_token);
+      await SecureStore.setItemAsync('refresh_token', data.session.refresh_token);
+    }
 
     const { data: userInfo, error: userError } = await supabase
       .from('user_info')
@@ -21,14 +31,10 @@ export const signInWithEmail = async (email: string, password: string, remember:
 
     if (userError) {
       console.error('Error fetching user info:', userError);
-    } else {
-      await SecureStore.setItemAsync('user_info', JSON.stringify(userInfo));
+      throw userError;
     }
 
-    if (remember) {
-      await SecureStore.setItemAsync('access_token', data.session.access_token);
-      await SecureStore.setItemAsync('refresh_token', data.session.refresh_token);
-    }
+    setUser(userInfo);
   }
 
   return data.session;
@@ -38,7 +44,8 @@ export const signUpWithEmail = async (
   email: string,
   password: string,
   firstName: string,
-  lastName: string
+  lastName: string,
+  setUser: (user: any) => void
 ) => {
   const { data, error } = await supabase.auth.signUp({
     email,
@@ -52,14 +59,12 @@ export const signUpWithEmail = async (
 
   if (!data.session) {
     console.warn('Please check your inbox for email verification!');
+    return { session: null, error: 'Verification required' };
   }
 
-  if (data.session) {
-    await SecureStore.setItemAsync('access_token', data.session.access_token);
-    await SecureStore.setItemAsync('refresh_token', data.session.refresh_token);
-  }
+  await SecureStore.setItemAsync('access_token', data.session.access_token);
+  await SecureStore.setItemAsync('refresh_token', data.session.refresh_token);
 
-  // User Info Object
   const userInfoObj = {
     uid: data.user?.id,
     first_name: firstName,
@@ -68,10 +73,14 @@ export const signUpWithEmail = async (
     image_url: ''
   };
 
-  await SecureStore.setItemAsync('user_info', JSON.stringify(userInfoObj));
+  const { error: insertError } = await supabase.from('user_info').insert([userInfoObj]);
 
-  // create user
-  await supabase.from('user_info').insert([userInfoObj]);
+  if (insertError) {
+    console.error('Error inserting user into database:', insertError);
+    return { session: null, error: insertError };
+  }
+
+  setUser(userInfoObj);
 
   return { session: data.session, error: null };
 };
