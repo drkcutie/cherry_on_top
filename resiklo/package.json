@@ -50,10 +50,10 @@
     "react-native-screens": "~4.4.0",
     "react-native-svg": "^15.11.2",
     "react-native-swipe-gestures": "^1.0.5",
+    "react-native-uuid": "^2.0.3",
     "react-native-web": "~0.19.13",
     "resiklo": "file:",
     "tailwindcss": "^3.4.17",
-    "uuid": "^11.1.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {
