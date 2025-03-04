@@ -94,7 +94,7 @@ export default function ScanScreen() {
         {uri && <Image source={{ uri }} className="h-screen w-full" />}
         <View className="absolute bottom-20 flex w-full flex-col items-center gap-4 px-16">
           <View className="w-full overflow-hidden rounded-full border-2 border-malachite py-1">
-            <Pressable onPress={() => setUri(null)} className="w-full py-2 active:opacity-80">
+            <Pressable onPress={retakePicture} className="w-full py-2 active:opacity-80">
               <Text className="text-center font-montserrat-bold text-lg uppercase tracking-wide text-malachite">
                 Retake
               </Text>

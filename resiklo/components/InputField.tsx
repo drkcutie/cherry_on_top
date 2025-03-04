@@ -34,7 +34,7 @@ export default function InputField({
 
   return (
     <View
-      className={`relative flex w-full flex-row border border-neutral-400 px-4 ${
+      className={`relative flex w-fit flex-row border border-neutral-400 px-4 ${
         isFocused ? 'bg-neutral-50' : 'bg-white'
       }`}
     >
