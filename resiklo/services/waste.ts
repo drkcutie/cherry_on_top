@@ -5,5 +5,5 @@ export const  getWaste = async () => {
     // .from('waste')
     // .select('*')
     // return waste
-    return
+    return 
 }
