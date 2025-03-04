@@ -18,13 +18,13 @@ export const checkIfExists = async (id: string): Promise<boolean> => {
 
 export const getUser = async (id: string) => {
     
-    const exists = await checkIfExists(id) 
-    
+    const exists = await checkIfExists(id)
+
     if (!exists) {
         return null
     }
 
-    let { data: user_info, error } = await supabase
+    const { data: user_info, error } = await supabase
         .from('user_info')
         .select('*')
         .eq('id', id)
