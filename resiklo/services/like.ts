@@ -29,7 +29,7 @@ export const toggleLike = async (user_id: string, post_id?: number, comment_id?:
             console.error(deleteError)
         }
         else {
-            console.log('Like deleted') // placeholder
+            console.log('unliked') // placeholder
         }
     }
     else {
@@ -48,7 +48,7 @@ export const toggleLike = async (user_id: string, post_id?: number, comment_id?:
                 console.error(insertError)
             }
             else {
-                console.log('Like inserted') // placeholder
+                console.log('liked') // placeholder
             }
     }
 };
