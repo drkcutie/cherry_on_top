@@ -11,6 +11,7 @@ export const getSignedUrl = async (filePath: string, fileName: string): Promise<
 
   return data.signedUrl;
 };
+
 export const uploadFile = async (
   filePath: string,
   fileName: string,
