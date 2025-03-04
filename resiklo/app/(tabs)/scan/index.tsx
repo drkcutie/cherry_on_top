@@ -5,6 +5,7 @@ import { Pressable, View, Text, TouchableOpacity, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SwitchCamera } from 'lucide-react-native';
 import React from 'react';
+import Animated, { FadeIn } from 'react-native-reanimated';
 
 export default function ScanScreen() {
   const [facing, setFacing] = useState<CameraType>('back');
@@ -51,22 +52,36 @@ export default function ScanScreen() {
     }
   };
 
+  const retakePicture = () => {
+    setUri(null);
+  };
+
   const renderPicture = () => {
     return (
       <View className="flex h-full w-full items-center justify-center gap-8">
-        {uri && <Image source={{ uri }} className="h-96 w-96" />}
-        <LinearGradient
-          className="overflow-hidden rounded-xl px-8 py-1"
-          colors={['#1D6742', '#3ACD83']}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-        >
-          <Pressable onPress={() => setUri(null)} className="w-full py-4 active:opacity-80">
-            <Text className="text-center font-montserrat-bold text-xl uppercase tracking-wide text-white">
-              Retake Image
-            </Text>
-          </Pressable>
-        </LinearGradient>
+        {uri && <Image source={{ uri }} className="h-screen w-full" />}
+        <View className="absolute bottom-20 flex w-full flex-col items-center gap-4 px-16">
+          <View className="w-full overflow-hidden rounded-full border-2 border-malachite py-1">
+            <Pressable onPress={() => setUri(null)} className="w-full py-2 active:opacity-80">
+              <Text className="text-center font-montserrat-bold text-lg uppercase tracking-wide text-malachite">
+                Retake
+              </Text>
+            </Pressable>
+          </View>
+
+          <LinearGradient
+            className="w-full overflow-hidden rounded-full py-1"
+            colors={['#1D6742', '#3ACD83']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+          >
+            <Pressable onPress={() => setUri(null)} className="w-full py-2 active:opacity-80">
+              <Text className="text-center font-montserrat-bold text-lg uppercase tracking-wide text-white">
+                Submit
+              </Text>
+            </Pressable>
+          </LinearGradient>
+        </View>
       </View>
     );
   };
@@ -79,10 +94,9 @@ export default function ScanScreen() {
         ref={ref}
         responsiveOrientationWhenOrientationLocked
       >
-        <View></View>
         <View className="relative h-full w-full items-center justify-end p-12">
           <View className="h-fit w-fit rounded-full border-2 border-malachite p-1">
-            <TouchableOpacity onPress={takePicture} className="h-12 w-12 rounded-full bg-white" />
+            <TouchableOpacity onPress={takePicture} className="h-16 w-16 rounded-full bg-white" />
           </View>
           <TouchableOpacity
             className="ml-auto h-16 w-16 items-center justify-center rounded-full bg-darthmouth p-2"
