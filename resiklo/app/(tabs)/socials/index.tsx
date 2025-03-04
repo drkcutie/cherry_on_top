@@ -12,6 +12,14 @@ export default function SocialScreen() {
 
                 </UserSocials>
 
+                <UserSocials firstName={"Mai"} lastName={"Deir"} profilePicture={""}>
+
+                </UserSocials>
+
+                <UserSocials firstName={"Mai"} lastName={"Deir"} profilePicture={""}>
+
+                </UserSocials>
+
               </View>
 
           </View>
