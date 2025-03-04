@@ -1,14 +1,7 @@
-import React, {useEffect, useState} from 'react';
 import {Pressable, SafeAreaView, ScrollView, Text, View} from 'react-native';
-import {supabase} from '@/lib/supabase';
-import Carousel from "@/components/Carousel";
-import HeyUser from "@/components/HeyUser";
-import TaskCard from "@/components/TaskCard";
 import Reward from "@/components/RewardPoints";
 import RewardCard from "@/components/RewardCard";
-import {_} from "ajv";
-import {index} from "@zxing/text-encoding/es2015/encoding/indexes";
-import {Redirect, router, useRouter} from "expo-router";
+import { useRouter} from "expo-router";
 
 export default function RewardScreen() {
     const router = useRouter()
@@ -19,7 +12,7 @@ export default function RewardScreen() {
                     <Reward ></Reward>
                     <View className='flex flex-row w-full p-3 justify-between items-center'>
                         <Text className='font-montserrat-bold text-xl'>All Rewards</Text>
-                        <Pressable onPressIn={() => router.replace('/(tabs)/points')}>
+                        <Pressable onPressIn={() => router.push("../stack/point-history")}>
                             <Text className='font-montserrat-medium text-darthmouth underline text-md'>My Redemption History</Text>
                         </Pressable>
                     </View>
