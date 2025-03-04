@@ -6,12 +6,42 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SwitchCamera } from 'lucide-react-native';
 import React from 'react';
 import Animated, { FadeIn } from 'react-native-reanimated';
+import {useMutation, useQuery} from "@tanstack/react-query";
+import {uploadAsync} from "expo-file-system";
+import axios from "axios";
+import { v4 as uuidv4 } from 'uuid';
+
 
 export default function ScanScreen() {
   const [facing, setFacing] = useState<CameraType>('back');
   const [permission, requestPermission] = useCameraPermissions();
   const [uri, setUri] = useState<string | null>(null);
   const ref = useRef<CameraView>(null);
+
+  const mutation = useMutation({
+    mutationFn: async (uri: string) => {
+      const formData = new FormData();
+      const uniqueImageName =  uuidv4() + ".jpg";
+      formData.append("file", {
+        uri,
+        name: uniqueImageName,
+        type: "image/jpeg",
+      } as any); // Type assertion to fix FormData TypeScript issues
+
+      return axios.post("https://your-api.com/upload", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    },
+    onSuccess: (data) => {
+      console.log("Upload successful!", data);
+    },
+    onError: (error) => {
+      console.error("Upload failed:", error);
+    },
+
+  });
 
   useEffect(() => {
     if (permission && !permission.granted) {
@@ -26,6 +56,11 @@ export default function ScanScreen() {
   if (!permission) {
     // Put code here for no camera permissions
     return <View />;
+  }
+
+  const sendToModel = () => {
+    if(uri !== null)
+    mutation.mutate(uri)
   }
 
   const toggleCameraFacing = () => {
@@ -75,7 +110,7 @@ export default function ScanScreen() {
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 0 }}
           >
-            <Pressable onPress={() => setUri(null)} className="w-full py-2 active:opacity-80">
+            <Pressable onPress={() => sendToModel()} className="w-full py-2 active:opacity-80">
               <Text className="text-center font-montserrat-bold text-lg uppercase tracking-wide text-white">
                 Submit
               </Text>
