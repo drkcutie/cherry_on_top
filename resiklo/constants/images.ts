@@ -16,6 +16,7 @@ const taskImages: Record<string, any[]> = {
     cardboard: Array.from({ length: IMAGE_LENGTH }, (_, i) =>
         require(`@/assets/images/trash_type/cardboard/${i + 1}.png`)
     ),
+
 };
 
 
