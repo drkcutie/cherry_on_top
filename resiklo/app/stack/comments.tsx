@@ -1,60 +1,58 @@
-import { useState } from "react";
-import { View, Text, Pressable, SafeAreaView, TextInput, ScrollView } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
+import { useState } from 'react';
+import { View, Text, Pressable, SafeAreaView, TextInput, ScrollView } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export default function CommentInput() {
-  const [comment, setComment] = useState("");
+  const [comment, setComment] = useState('');
   const [comments, setComments] = useState([
-    { id: 1, user: "Alex", text: "This is amazing!", timestamp: "2h ago" },
-    { id: 2, user: "Jamie", text: "I totally agree with this!", timestamp: "30m ago" },
-    { id: 3, user: "Kaz", text: "Oh my God", timestamp: "2m ago" },
-    { id: 4, user: "Derik", text: "Damn!", timestamp: "1m ago" },
+    { id: 1, user: 'Alex', text: 'This is amazing!', timestamp: '2h ago' },
+    { id: 2, user: 'Jamie', text: 'I totally agree with this!', timestamp: '30m ago' },
+    { id: 3, user: 'Kaz', text: 'Oh my God', timestamp: '2m ago' },
+    { id: 4, user: 'Derik', text: 'Damn!', timestamp: '1m ago' }
   ]);
 
   const handleSubmit = () => {
-    if (comment.trim() === "") return;
+    if (comment.trim() === '') return;
 
     const newComment = {
       id: comments.length + 1,
-      user: "You",
+      user: 'You',
       text: comment,
-      timestamp: "Just now",
+      timestamp: 'Just now'
     };
 
     setComments([newComment, ...comments]);
-    setComment("");
+    setComment('');
   };
 
   return (
     <SafeAreaView className="flex-1 bg-white px-5 py-6">
       {/* Title */}
-      <Text className="text-lg font-bold mb-6">Comments</Text>
+      <Text className="mb-6 text-lg font-bold">Comments</Text>
 
       {/* Comments Section */}
-      <ScrollView className="flex-1 mb-6">
+      <ScrollView className="mb-6 flex-1">
         {comments.map((item) => (
-          <View key={item.id} className="flex-row items-start mb-6">
+          <View key={item.id} className="mb-6 flex-row items-start">
             {/* User Avatar */}
-            <View className="w-10 h-10 rounded-full bg-gray-300 flex items-center justify-center mr-4">
-              <Text className="text-lg font-bold text-gray-600">
-                {item.user.charAt(0)}
-              </Text>
+            <View className="mr-4 flex h-10 w-10 items-center justify-center rounded-full bg-gray-300">
+              <Text className="text-lg font-bold text-gray-600">{item.user.charAt(0)}</Text>
             </View>
 
             {/* Comment Content */}
             <View className="flex-1">
-              <Text className="font-semibold text-sm">{item.user}</Text>
-              <Text className="text-sm text-gray-800 leading-tight">{item.text}</Text>
-              <Text className="text-xs text-gray-500 mt-1">{item.timestamp}</Text>
+              <Text className="text-sm font-semibold">{item.user}</Text>
+              <Text className="text-sm leading-tight text-gray-800">{item.text}</Text>
+              <Text className="mt-1 text-xs text-gray-500">{item.timestamp}</Text>
             </View>
           </View>
         ))}
       </ScrollView>
 
       {/* Fixed Comment Input */}
-      <View className="border border-gray-300 rounded-lg px-4 py-2 mb-6">
+      <View className="mb-6 rounded-lg border border-gray-300 px-4 py-2">
         <TextInput
-          className="text-base text-gray-900 w-full py-2"
+          className="w-full py-2 text-base text-gray-900"
           placeholder="Write a comment..."
           placeholderTextColor="#999"
           value={comment}
@@ -64,14 +62,14 @@ export default function CommentInput() {
       </View>
 
       {/* Submit Button */}
-      <Pressable onPress={handleSubmit} className="rounded-full overflow-hidden">
+      <Pressable onPress={handleSubmit} className="overflow-hidden rounded-full">
         <LinearGradient
           colors={['#1D6742', '#3ACD83']}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 0 }}
-          className="w-full h-12 flex items-center justify-center rounded-full"
+          className="flex h-12 w-full items-center justify-center rounded-full"
         >
-          <Text className="text-white font-bold text-base">Post</Text>
+          <Text className="text-base font-bold text-white">Post</Text>
         </LinearGradient>
       </Pressable>
     </SafeAreaView>

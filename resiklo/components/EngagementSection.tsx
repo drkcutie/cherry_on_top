@@ -1,7 +1,7 @@
-import { View, Text, Pressable } from "react-native";
-import React from "react";
-import Icon from "react-native-vector-icons/Feather";
-import { router } from "expo-router";
+import { View, Text, Pressable } from 'react-native';
+import React from 'react';
+import Icon from 'react-native-vector-icons/Feather';
+import { router } from 'expo-router';
 
 interface EngagementProps {
   likes: number;
@@ -11,21 +11,17 @@ interface EngagementProps {
 
 export default function EngagementSection({ likes, comments, postId }: EngagementProps) {
   const handleCommentPress = () => {
-    router.push("/stack/comments");
+    router.push('/stack/comments');
     // router.push(`/stack/${postId}`);
   };
 
   return (
-    <View className="w-full flex flex-col pl-10 pr-10">
-
-
-      <View className="flex flex-row justify-between items-center mt-2 mb-2">
-
+    <View className="flex w-full flex-col pl-10 pr-10">
+      <View className="mb-2 mt-2 flex flex-row items-center justify-between">
         <View className="flex flex-row items-center gap-1">
           <Icon name="thumbs-up" size={20} color="#555" />
           <Text className="text-sm">{likes}</Text>
         </View>
-
 
         <Pressable className="px-2 py-1" onPress={handleCommentPress}>
           <View className="flex flex-row items-center gap-1">

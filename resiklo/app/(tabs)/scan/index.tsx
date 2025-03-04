@@ -6,11 +6,10 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SwitchCamera } from 'lucide-react-native';
 import React from 'react';
 import Animated, { FadeIn } from 'react-native-reanimated';
-import {useMutation, useQuery} from "@tanstack/react-query";
-import {uploadAsync} from "expo-file-system";
-import axios from "axios";
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { uploadAsync } from 'expo-file-system';
+import axios from 'axios';
 import { v4 as uuidv4 } from 'uuid';
-
 
 export default function ScanScreen() {
   const [facing, setFacing] = useState<CameraType>('back');
@@ -21,26 +20,25 @@ export default function ScanScreen() {
   const mutation = useMutation({
     mutationFn: async (uri: string) => {
       const formData = new FormData();
-      const uniqueImageName =  uuidv4() + ".jpg";
-      formData.append("file", {
+      const uniqueImageName = uuidv4() + '.jpg';
+      formData.append('file', {
         uri,
         name: uniqueImageName,
-        type: "image/jpeg",
+        type: 'image/jpeg'
       } as any); // Type assertion to fix FormData TypeScript issues
 
-      return axios.post("https://your-api.com/upload", formData, {
+      return axios.post('https://your-api.com/upload', formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
-        },
+          'Content-Type': 'multipart/form-data'
+        }
       });
     },
     onSuccess: (data) => {
-      console.log("Upload successful!", data);
+      console.log('Upload successful!', data);
     },
     onError: (error) => {
-      console.error("Upload failed:", error);
-    },
-
+      console.error('Upload failed:', error);
+    }
   });
 
   useEffect(() => {
@@ -59,9 +57,8 @@ export default function ScanScreen() {
   }
 
   const sendToModel = () => {
-    if(uri !== null)
-    mutation.mutate(uri)
-  }
+    if (uri !== null) mutation.mutate(uri);
+  };
 
   const toggleCameraFacing = () => {
     setFacing((curr) => (curr === 'back' ? 'front' : 'back'));

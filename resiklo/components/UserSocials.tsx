@@ -1,6 +1,6 @@
-import { View, Text, Image } from "react-native";
-import React from "react";
-import defaultImages from "@/constants/defaultImages";
+import { View, Text, Image } from 'react-native';
+import React from 'react';
+import defaultImages from '@/constants/defaultImages';
 
 interface UserProps {
   firstName: string;
@@ -12,26 +12,33 @@ interface UserProps {
   achievements: number;
 }
 
-export default function UserSocials({firstName,lastName,profilePicture,dailyPoints,totalPoints,achievements,caption,}: UserProps) {
+export default function UserSocials({
+  firstName,
+  lastName,
+  profilePicture,
+  dailyPoints,
+  totalPoints,
+  achievements,
+  caption
+}: UserProps) {
   return (
-    <View className="flex flex-col justify-center items-center gap-3 p-4 rounded-lg w-full">
-
-
-      <View className="flex flex-row gap-3 justify-center">
+    <View className="flex w-full flex-col items-center justify-center gap-3 rounded-lg p-4">
+      <View className="flex flex-row justify-center gap-3">
         <Image
           source={profilePicture ? { uri: profilePicture } : defaultImages.derik}
-          className="w-12 h-12 rounded-full"
+          className="h-12 w-12 rounded-full"
         />
-        <View className="flex flex-col flex-1">
-          <Text className="text-lg font-semibold">{firstName} {lastName}</Text>
+        <View className="flex flex-1 flex-col">
+          <Text className="text-lg font-semibold">
+            {firstName} {lastName}
+          </Text>
           <Text>1hr ago</Text>
         </View>
       </View>
 
-      <Text className="text-2xl font-bold self-start pt-1">{caption}</Text>
+      <Text className="self-start pt-1 text-2xl font-bold">{caption}</Text>
 
-
-      <View className="flex flex-row gap-3 justify-between w-full items-center">
+      <View className="flex w-full flex-row items-center justify-between gap-3">
         <View className="flex flex-col items-center">
           <Text className="text-sm">Daily Points</Text>
           <Text className="font-bold">{dailyPoints} pts</Text>
@@ -45,7 +52,6 @@ export default function UserSocials({firstName,lastName,profilePicture,dailyPoin
           <Text className="font-bold">🏆 {achievements}</Text>
         </View>
       </View>
-
     </View>
   );
 }

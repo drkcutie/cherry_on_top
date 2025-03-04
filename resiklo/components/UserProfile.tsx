@@ -100,16 +100,16 @@ export default function UserProfile({
           shadowRadius: 4
         }}
       />
-      //Activity (Socials) to get from zak
+
       <Text className="ml-2 mt-2 self-start font-montserrat-semi-bold text-xl text-black">
         Activity
       </Text>
       <View className="items-left flex flex-col justify-center">
         <UserSocials
-          firstName={'Derik'}
-          lastName={'Binembang'}
-          profilePicture={''}
-          dailyPoints={0}
+          firstName={firstName}
+          lastName={lastName}
+          profilePicture={profilePicture}
+          dailyPoints={dailyPoints}
           totalPoints={0}
           achievements={0}
           caption={''}
