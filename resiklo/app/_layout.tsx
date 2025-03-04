@@ -10,6 +10,7 @@ import { useColorScheme } from '@/components/useColorScheme';
 
 import { roboto, montserrat, zain } from '@/constants/fonts';
 import '../global.css';
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -45,14 +46,18 @@ export default function RootLayout() {
   return <RootLayoutNav />;
 }
 
+const queryClient = new QueryClient()
+
 function RootLayoutNav() {
   const colorScheme = useColorScheme();
 
   return (
+      <QueryClientProvider client={queryClient}>
     <ThemeProvider value={DefaultTheme}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
       </Stack>
     </ThemeProvider>
+      </QueryClientProvider>
   );
 }

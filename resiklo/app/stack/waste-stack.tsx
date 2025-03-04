@@ -93,18 +93,18 @@ export default function WasteScreen() {
 
                     {/* Animated Gradient Card */}
                     <Animated.View
-                        className="w-[100%] h-80 mt-4 rounded-3xl overflow-hidden"
+                        className="w-[90%] h-80 mt-4 rounded-3xl overflow-hidden"
                         entering={FadeInUp.duration(500).delay(600)}
                     >
                         <LinearGradient
                             colors={["#1D6742", "#3ACD83"]}
                             start={{ x: 0, y: 0 }}
                             end={{ x: 1, y: 0 }}
-                            className="w-full h-full rounded-2xl"
+                            className="w-[90%] h-full  rounded-2xl"
                         >
                             <View className="relative w-full h-full flex items-center justify-center">
                                 <Text className="text-black text-left font-montserrat-semi-bold text-jet text-5xl">
-                                    You've earned {"\n"}
+                                    You've earned  {"\n"}
                                     <Text className="font-montserrat-bold">{points} points</Text> for {"\n"}this scan!
                                 </Text>
                             </View>

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Image, SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 import {supabase} from '@/lib/supabase';
 import Carousel from "@/components/Carousel";
 import HeyUser from "@/components/HeyUser";
@@ -32,13 +32,13 @@ export default function HomeScreen() {
 
     const globeTranslateX = useSharedValue(0);
     globeTranslateX.value = withRepeat(
-        withTiming(10, { duration: 1500, easing: Easing.inOut(Easing.sin) }),
+        withTiming(10, {duration: 1500, easing: Easing.inOut(Easing.sin)}),
         -1,
         true
     );
 
-    const globeStyle= useAnimatedStyle(() => ({
-        transform: [{ translateX: globeTranslateX.value }],
+    const globeStyle = useAnimatedStyle(() => ({
+        transform: [{translateX: globeTranslateX.value}],
     }));
 
     return (
@@ -48,7 +48,7 @@ export default function HomeScreen() {
                     <Carousel></Carousel>
                     <View className='flex flex-col gap-5 p-5 bg-white -mt-10 rounded-t-3xl pt-10'>
                         <View className="relative  border-1 border-black">
-                            <HeyUser firstName="Zak" />
+                            <HeyUser firstName="Zak"/>
                             <Animated.Image
                                 source={defaultImages.globe}
                                 className="h-80 absolute bottom-[-10px] right-[-30px] border-black"
@@ -59,11 +59,12 @@ export default function HomeScreen() {
 
                         </View>
                         <Text className="text-default_gray font-montserrat-semi-bold text-xl  ml-2 self-start">
-                            You've recycled <Text className="text-darthmouth font-montserrat-bold">24</Text> this{'\n'}week. Keep going!
+                            You've recycled <Text className="text-darthmouth font-montserrat-bold">24</Text> this{'\n'}week.
+                            Keep going!
                         </Text>
                         <View className='flex flex-col gap-7 items-center justify-center'>
-                            {[...Array(10)].map((_,index) => (
-                                <TaskCard key = {index}></TaskCard>
+                            {[...Array(10)].map((_, index) => (
+                                <TaskCard key={index}></TaskCard>
                             ))}
                         </View>
                     </View>
