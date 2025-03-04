@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from "react";
-import {View, Text, ImageBackground, Dimensions} from "react-native";
+import React, {useEffect, useState} from "react";
+import {Dimensions, ImageBackground, Text, View} from "react-native";
 import GestureRecognizer from "react-native-swipe-gestures";
-import Animated, {useSharedValue, useAnimatedStyle, withTiming} from "react-native-reanimated";
+import Animated, {useAnimatedStyle, useSharedValue, withTiming} from "react-native-reanimated";
 import Texture from "@/constants/texture";
 
 const {width} = Dimensions.get("window");
@@ -92,7 +92,8 @@ export default function Carousel() {
                             />
                         ))}
                     </View>
-                    <Animated.View style={[animatedStyle]} className="flex flex-col gap-3 text-right pl-5 h-[200px] border-black">
+                    <Animated.View style={[animatedStyle]}
+                                   className="flex flex-col gap-3 text-right pl-5 h-[200px] border-black">
 
                         <Text
                             className={` font-roboto-bold text-5xl text-left ${checkIfGreen(textSlides[index][0])} `}>
@@ -109,7 +110,7 @@ export default function Carousel() {
                         </Text>
 
                         <Text
-                            className={` font-roboto-bold  text-left ${checkIfGreen(textSlides[index][3])} ${index === 1 ?" text-4xl" : "text-5xl"} `}>
+                            className={` font-roboto-bold  text-left ${checkIfGreen(textSlides[index][3])} ${index === 1 ? " text-4xl" : "text-5xl"} `}>
                             {cleanText(textSlides[index][3])}
                         </Text>
                     </Animated.View>

@@ -5,6 +5,14 @@ import Carousel from "@/components/Carousel";
 import HeyUser from "@/components/HeyUser";
 import TaskCard from "@/components/TaskCard";
 import defaultImages from "@/constants/defaultImages";
+import Animated, {
+    Easing,
+    FadeInUp,
+    useAnimatedStyle,
+    useSharedValue,
+    withRepeat,
+    withTiming
+} from "react-native-reanimated";
 
 export default function HomeScreen() {
     // Testing if login works
@@ -21,6 +29,18 @@ export default function HomeScreen() {
         setEmail();
     }, []);
 
+
+    const globeTranslateX = useSharedValue(0);
+    globeTranslateX.value = withRepeat(
+        withTiming(10, { duration: 1500, easing: Easing.inOut(Easing.sin) }),
+        -1,
+        true
+    );
+
+    const globeStyle= useAnimatedStyle(() => ({
+        transform: [{ translateX: globeTranslateX.value }],
+    }));
+
     return (
         <SafeAreaView className="flex-1">
             <ScrollView contentContainerClassName="">
@@ -29,10 +49,12 @@ export default function HomeScreen() {
                     <View className='flex flex-col gap-5 p-5 bg-white -mt-10 rounded-t-3xl pt-10'>
                         <View className="relative  border-1 border-black">
                             <HeyUser firstName="Zak" />
-                            <Image
+                            <Animated.Image
                                 source={defaultImages.globe}
                                 className="h-80 absolute bottom-[-10px] right-[-30px] border-black"
                                 resizeMode="contain"
+                                entering={FadeInUp.duration(500)}
+                                style={globeStyle}
                             />
 
                         </View>

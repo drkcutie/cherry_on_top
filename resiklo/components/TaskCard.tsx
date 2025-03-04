@@ -36,8 +36,9 @@ export default function TaskCard() {
                     end={{ x: 1, y: 0.5 }}
                 >
 
-                <Pressable onPress={() => router.replace('/(tabs)/scan') } className="bg-transparent h-10 w-24 rounded-2xl active:scale-105  flex items-center justify-center">
+                <Pressable onPress={() => router.replace('/stack/waste-stack') } className="bg-transparent h-10 w-24 rounded-2xl active:scale-105  flex items-center justify-center">
                     <Text className="font-roboto-bold text-white" >Scan now</Text>
+
                 </Pressable>
                 </LinearGradient>
 
