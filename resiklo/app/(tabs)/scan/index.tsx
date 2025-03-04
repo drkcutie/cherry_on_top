@@ -12,32 +12,19 @@ export default function ScanScreen() {
   const [uri, setUri] = useState<string | null>(null);
   const ref = useRef<CameraView>(null);
 
+  useEffect(() => {
+    if (permission && !permission.granted) {
+      requestPermission();
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(uri);
+  }, [uri]);
+
   if (!permission) {
     // Put code here for no camera permissions
     return <View />;
-  }
-
-  if (!permission.granted) {
-    return (
-      <SafeAreaView className="flex-1 items-center justify-center bg-white">
-        <View className="flex h-96 w-full flex-col items-center justify-between gap-4 px-8">
-          <Text>We need your permission to show the camera</Text>
-          <View className="w-full overflow-hidden rounded-full">
-            <LinearGradient
-              colors={['#1D6742', '#3ACD83']}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 0 }}
-            >
-              <Pressable className="w-full py-4 active:opacity-80" onPress={requestPermission}>
-                <Text className="text-center font-montserrat-bold text-xl uppercase tracking-wide text-white">
-                  Request Permission
-                </Text>
-              </Pressable>
-            </LinearGradient>
-          </View>
-        </View>
-      </SafeAreaView>
-    );
   }
 
   const toggleCameraFacing = () => {
@@ -45,18 +32,42 @@ export default function ScanScreen() {
   };
 
   const takePicture = async () => {
-    const photo = await ref.current?.takePictureAsync();
+    if (!ref.current) {
+      console.log('Camera reference is null');
+      return;
+    }
 
-    if (photo) {
-      setUri(photo?.uri);
+    try {
+      const photo = await ref.current.takePictureAsync();
+      console.log('Captured photo:', photo);
+
+      if (photo?.uri) {
+        setUri(photo.uri);
+      } else {
+        console.log('Photo URI is null!');
+      }
+    } catch (error) {
+      console.error('Error taking picture:', error);
     }
   };
 
   const renderPicture = () => {
     return (
-      <>
-        <View>{uri && <Image source={{ uri }} />}</View>
-      </>
+      <View className="flex h-full w-full items-center justify-center gap-8">
+        {uri && <Image source={{ uri }} className="h-96 w-96" />}
+        <LinearGradient
+          className="overflow-hidden rounded-xl px-8 py-1"
+          colors={['#1D6742', '#3ACD83']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+        >
+          <Pressable onPress={() => setUri(null)} className="w-full py-4 active:opacity-80">
+            <Text className="text-center font-montserrat-bold text-xl uppercase tracking-wide text-white">
+              Retake Image
+            </Text>
+          </Pressable>
+        </LinearGradient>
+      </View>
     );
   };
 
@@ -69,10 +80,12 @@ export default function ScanScreen() {
         responsiveOrientationWhenOrientationLocked
       >
         <View></View>
-        <View className="relative h-full w-full items-end justify-end p-12">
-          <Pressable onPress={takePicture} className="h-12 w-12 bg-white" />
+        <View className="relative h-full w-full items-center justify-end p-12">
+          <View className="h-fit w-fit rounded-full border-2 border-malachite p-1">
+            <TouchableOpacity onPress={takePicture} className="h-12 w-12 rounded-full bg-white" />
+          </View>
           <TouchableOpacity
-            className="h-16 w-16 items-center justify-center rounded-full bg-darthmouth p-2"
+            className="ml-auto h-16 w-16 items-center justify-center rounded-full bg-darthmouth p-2"
             onPress={toggleCameraFacing}
           >
             <SwitchCamera size={24} color="white" />
