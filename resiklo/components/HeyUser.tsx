@@ -10,7 +10,7 @@ interface User {
 export default function HeyUser({firstName}: User) {
     return (
         <>
-            <Text className=" pl-2 mb-5 font-montserrat-semi-bold text-3xl self-start">Hey, {""}
+            <Text className=" pl-2  font-montserrat-semi-bold text-3xl self-start">Hey, {""}
                 <Text className="text-darthmouth  self-start">{firstName}!</Text>
             </Text>
 

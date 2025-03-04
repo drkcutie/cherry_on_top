@@ -78,41 +78,42 @@ export default function Carousel() {
             <ImageBackground
                 source={Texture.paper}
                 resizeMode="cover"
-                className="w-full self-center  h-96 rounded-3xl overflow-hidden bg-green-600"
+                className="w-full self-center  h-96  overflow-hidden bg-green-600"
             >
                 <View
-                    className="w-full h-full border-1 text-right border-black bg-black/50 justify-center gap-5 pt-10  pb-10 p-5 rounded-3xl">
+                    className="w-full h-full border-1 text-right border-black bg-black/40 justify-center gap-5   pb-10  ">
                     {/* Animated Sliding Text */}
-                    <Animated.View style={[animatedStyle]} className="flex flex-col gap-3 text-right">
 
-                        <Text
-                            className={` font-roboto-bold text-6xl ${checkIfGreen(textSlides[index][0])} ${textAlignment}`}>
-                            {cleanText(textSlides[index][0])}
-                        </Text>
-                        <Text
-                            className={` font-roboto-bold text-6xl  ${checkIfGreen(textSlides[index][1])} ${textAlignment}`}>
-                            {cleanText(textSlides[index][1])}
-                        </Text>
-
-                        <Text
-                            className={` font-roboto-bold text-6xl ${checkIfGreen(textSlides[index][2])} ${textAlignment}`}>
-                            {cleanText(textSlides[index][2])}
-                        </Text>
-
-                        <Text
-                            className={` font-roboto-bold text-6xl  ${checkIfGreen(textSlides[index][3])} ${textAlignment}`}>
-                            {cleanText(textSlides[index][3])}
-                        </Text>
-                    </Animated.View>
                     <View className="flex flex-row items-center gap-4 self-center">
                         {[...Array(3)].map((_, index) => (
                             <Animated.View
                                 key={index}
-                                className="h-3 rounded-full"
+                                className="h-2 w-2 rounded-full"
                                 style={[animatedIndicator(index)]}
                             />
                         ))}
                     </View>
+                    <Animated.View style={[animatedStyle]} className="flex flex-col gap-3 text-right pl-5">
+
+                        <Text
+                            className={` font-roboto-bold text-5xl text-left ${checkIfGreen(textSlides[index][0])} `}>
+                            {cleanText(textSlides[index][0])}
+                        </Text>
+                        <Text
+                            className={` font-roboto-bold text-5xl  text-left ${checkIfGreen(textSlides[index][1])} `}>
+                            {cleanText(textSlides[index][1])}
+                        </Text>
+
+                        <Text
+                            className={` font-roboto-bold text-5xl text-left ${checkIfGreen(textSlides[index][2])} `}>
+                            {cleanText(textSlides[index][2])}
+                        </Text>
+
+                        <Text
+                            className={` font-roboto-bold  text-left ${checkIfGreen(textSlides[index][3])} ${index === 1 ?" text-4xl" : "text-5xl"} `}>
+                            {cleanText(textSlides[index][3])}
+                        </Text>
+                    </Animated.View>
                 </View>
             </ImageBackground>
 
