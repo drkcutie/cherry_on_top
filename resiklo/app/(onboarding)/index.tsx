@@ -1,32 +1,31 @@
 import { useState } from 'react';
-import { Text, View, Pressable, SafeAreaView } from 'react-native';
+import { Text, View, Pressable, SafeAreaView, Image } from 'react-native';
 import ResikloWord from '@/components/svgs/ResikloWord';
-import MobileHand from '@/components/svgs/MobileHand';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
   FadeIn
 } from 'react-native-reanimated';
-import Smiley from '@/components/svgs/Smiley';
-import Mushroom from '@/components/svgs/Mushroom';
 import { Link } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
 
 // Static data for each onboarding screen
 const onboardingScreens = [
   {
-    image: <MobileHand />,
+    image: <Image source={require('@/assets/images/onboarding-1.png')} />,
     title: 'Scan. Track. Reduce. Sustain.',
     desc: 'Effortlessly identify waste, monitor your impact, and build lasting sustainable habits.'
   },
   {
-    image: <Smiley />,
+    image: <Image source={require('@/assets/images/onboarding-2.png')} />,
     title: 'Turn Waste into Impact with AI.',
     desc: 'Use AI to detect, track, and reduce waste while making a real difference for the planet.'
   },
   {
-    image: <Mushroom />,
+    image: <Image source={require('@/assets/images/onboarding-3.png')} />,
     title: 'Gamify Your Sustainability Journey.',
     desc: 'Earn rewards, track progress, and compete in challenges to make sustainability fun!'
   }
@@ -55,7 +54,7 @@ export default function OnboardingScreen() {
       width:
         pageIndex === index ? withTiming(40, { duration: 300 }) : withTiming(12, { duration: 300 }),
       // if index is selected, then bg color is primary (dartmouth) else text color (jet)
-      backgroundColor: pageIndex === index ? '#1D6742' : '#2E2E2E'
+      backgroundColor: pageIndex === index ? '#1D6742' : '#525252'
     }));
 
   const handleViewedOnboarding = async () => {
@@ -67,12 +66,12 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <SafeAreaView className="h-screen-safe flex w-screen flex-col items-center gap-20 py-12">
+    <SafeAreaView className="flex h-full w-screen flex-col items-center gap-20 py-12">
       <View className="flex flex-col items-center justify-center gap-8">
         <Animated.View entering={FadeIn.duration(500)} className="mb-14">
           <ResikloWord width="225" height="125" />
         </Animated.View>
-        <Animated.View entering={FadeIn.duration(500)}>
+        <Animated.View entering={FadeIn.duration(500)} className="mx-auto h-60 w-auto items-center">
           {onboardingScreens[pageIndex].image}
         </Animated.View>
 
@@ -102,24 +101,37 @@ export default function OnboardingScreen() {
             <Pressable className="px-12 py-4" onPress={handleSkip}>
               <Text className="font-montserrat text-lg text-darthmouth">Skip</Text>
             </Pressable>
-            <Pressable
-              className="rounded-lg bg-darthmouth px-16 py-4 active:opacity-80"
-              onPress={handleNext}
-            >
-              <Text className="font-montserrat-bold text-lg text-white">Next</Text>
-            </Pressable>
+            <View className="overflow-hidden rounded-lg">
+              <LinearGradient
+                colors={['#1D6742', '#3ACD83']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <Pressable className="px-16 py-4 active:opacity-80" onPress={handleNext}>
+                  <Text className="font-montserrat-bold text-lg text-white">Next</Text>
+                </Pressable>
+              </LinearGradient>
+            </View>
           </>
         ) : (
           <>
-            <Link
-              className="w-full rounded-lg bg-darthmouth py-4"
-              href={'/(auth)/login'}
-              onPress={handleViewedOnboarding}
-            >
-              <Text className="text-center font-montserrat-bold text-lg text-white">
-                Let's get started!
-              </Text>
-            </Link>
+            <View className="overflow-hidden rounded-lg">
+              <LinearGradient
+                colors={['#1D6742', '#3ACD83']}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 0 }}
+              >
+                <Link
+                  className="w-full rounded-lg py-4"
+                  href={'/(auth)/login'}
+                  onPress={handleViewedOnboarding}
+                >
+                  <Text className="text-center font-montserrat-bold text-lg text-white">
+                    Let's get started!
+                  </Text>
+                </Link>
+              </LinearGradient>
+            </View>
           </>
         )}
       </View>
