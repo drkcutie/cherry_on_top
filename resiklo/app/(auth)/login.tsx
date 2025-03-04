@@ -8,6 +8,8 @@ import { Lock, LucideMessageSquareWarning, Mail } from 'lucide-react-native';
 import ResikloWord from '@/components/svgs/ResikloWord';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import GoogleIcon from '@/components/svgs/GoogleIcon';
+import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
 
 const loginSchema = z.object({
   email: z.string().email({ message: 'Invalid email address' }),
@@ -64,7 +66,7 @@ export default function LoginScreen() {
   };
 
   return (
-    <SafeAreaView className="w-full bg-white h-full">
+    <SafeAreaView className="h-full w-full bg-white">
       <View className="flex h-full w-full flex-col items-center gap-8 px-8 py-12">
         <View className="flex w-full flex-col items-center">
           <Animated.View entering={FadeIn.duration(500)}>
@@ -127,19 +129,28 @@ export default function LoginScreen() {
         </Animated.View>
 
         <View className="flex w-full flex-col items-center gap-2">
-          <Pressable
-            className="w-full rounded-full bg-darthmouth py-4 active:opacity-80"
-            onPress={handleLogin}
-            disabled={loading}
-          >
-            {loading ? (
-              <ActivityIndicator />
-            ) : (
-              <Text className="text-center font-montserrat-bold text-xl uppercase tracking-wide text-white">
-                {loading ? '' : 'Log In'}
-              </Text>
-            )}
-          </Pressable>
+          <View className="w-full overflow-hidden rounded-full">
+            <LinearGradient
+              colors={['#1D6742', '#3ACD83']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            >
+              <Pressable
+                className="w-full py-4 active:opacity-80"
+                onPress={handleLogin}
+                disabled={loading}
+              >
+                {loading ? (
+                  <ActivityIndicator />
+                ) : (
+                  <Text className="text-center font-montserrat-bold text-xl uppercase tracking-wide text-white">
+                    {loading ? '' : 'Log In'}
+                  </Text>
+                )}
+              </Pressable>
+            </LinearGradient>
+          </View>
+
           <View className="my-4 flex-row items-center">
             <View className="h-[1px] flex-1 bg-neutral-300" />
             <Text className="mx-4 text-neutral-500">OR</Text>
