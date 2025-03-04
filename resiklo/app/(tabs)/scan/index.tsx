@@ -1,41 +1,115 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { CameraView, useCameraPermissions } from 'expo-camera';
-import { Pressable, View, Text, TouchableOpacity } from 'react-native';
+import { CameraView, useCameraPermissions, CameraType } from 'expo-camera';
+import { Pressable, View, Text, TouchableOpacity, Image } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { SwitchCamera } from 'lucide-react-native';
+import React from 'react';
+import Animated, { FadeIn } from 'react-native-reanimated';
 
 export default function ScanScreen() {
-  const [facing, setFacing] = useState<'front' | 'back'>('back');
+  const [facing, setFacing] = useState<CameraType>('back');
   const [permission, requestPermission] = useCameraPermissions();
+  const [uri, setUri] = useState<string | null>(null);
+  const ref = useRef<CameraView>(null);
+
+  useEffect(() => {
+    if (permission && !permission.granted) {
+      requestPermission();
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log(uri);
+  }, [uri]);
 
   if (!permission) {
     // Put code here for no camera permissions
     return <View />;
   }
 
-  if (!permission.granted) {
-    return (
-      <SafeAreaView className="flex-1 items-center justify-center">
-        <Text>We need your permission to show the camera</Text>
-        <Pressable onPress={requestPermission}>
-          <Text>Request Permission</Text>
-        </Pressable>
-      </SafeAreaView>
-    );
-  }
-
-  function toggleCameraFacing() {
+  const toggleCameraFacing = () => {
     setFacing((curr) => (curr === 'back' ? 'front' : 'back'));
-  }
+  };
 
-  return (
-    <SafeAreaView className="h-screen-safe w-full">
-      <CameraView facing={facing} className="h-full w-full">
-        <View className="relative h-full w-full">
-          <TouchableOpacity>
-            <Text>Flip Camera</Text>
+  const takePicture = async () => {
+    if (!ref.current) {
+      console.log('Camera reference is null');
+      return;
+    }
+
+    try {
+      const photo = await ref.current.takePictureAsync();
+      console.log('Captured photo:', photo);
+
+      if (photo?.uri) {
+        setUri(photo.uri);
+      } else {
+        console.log('Photo URI is null!');
+      }
+    } catch (error) {
+      console.error('Error taking picture:', error);
+    }
+  };
+
+  const retakePicture = () => {
+    setUri(null);
+  };
+
+  const renderPicture = () => {
+    return (
+      <View className="flex h-full w-full items-center justify-center gap-8">
+        {uri && <Image source={{ uri }} className="h-screen w-full" />}
+        <View className="absolute bottom-20 flex w-full flex-col items-center gap-4 px-16">
+          <View className="w-full overflow-hidden rounded-full border-2 border-malachite py-1">
+            <Pressable onPress={() => setUri(null)} className="w-full py-2 active:opacity-80">
+              <Text className="text-center font-montserrat-bold text-lg uppercase tracking-wide text-malachite">
+                Retake
+              </Text>
+            </Pressable>
+          </View>
+
+          <LinearGradient
+            className="w-full overflow-hidden rounded-full py-1"
+            colors={['#1D6742', '#3ACD83']}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+          >
+            <Pressable onPress={() => setUri(null)} className="w-full py-2 active:opacity-80">
+              <Text className="text-center font-montserrat-bold text-lg uppercase tracking-wide text-white">
+                Submit
+              </Text>
+            </Pressable>
+          </LinearGradient>
+        </View>
+      </View>
+    );
+  };
+
+  const renderCamera = () => {
+    return (
+      <CameraView
+        facing={facing}
+        className="h-full w-full"
+        ref={ref}
+        responsiveOrientationWhenOrientationLocked
+      >
+        <View className="relative h-full w-full items-center justify-end p-12">
+          <View className="h-fit w-fit rounded-full border-2 border-malachite p-1">
+            <TouchableOpacity onPress={takePicture} className="h-16 w-16 rounded-full bg-white" />
+          </View>
+          <TouchableOpacity
+            className="ml-auto h-16 w-16 items-center justify-center rounded-full bg-darthmouth p-2"
+            onPress={toggleCameraFacing}
+          >
+            <SwitchCamera size={24} color="white" />
           </TouchableOpacity>
         </View>
       </CameraView>
-    </SafeAreaView>
+    );
+  };
+
+  return (
+    <SafeAreaView className="h-full w-full">{uri ? renderPicture() : renderCamera()}</SafeAreaView>
   );
 }
