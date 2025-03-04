@@ -39,8 +39,6 @@ export default function LoginScreen() {
   };
 
   const handleLogin = async () => {
-    router.replace('/(tabs)/home');
-    return;
     const validation = loginSchema.safeParse(userInfo);
 
     if (!validation.success) {
@@ -156,6 +154,7 @@ export default function LoginScreen() {
             <Text className="mx-4 text-neutral-500">OR</Text>
             <View className="h-[1px] flex-1 bg-neutral-300" />
           </View>
+
           <Pressable
             className="flex w-full flex-row items-center justify-center gap-4 rounded-full bg-white py-4 shadow-md active:opacity-80"
             onPress={() => router.replace('/(tabs)/home')}

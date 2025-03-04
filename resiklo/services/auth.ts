@@ -18,22 +18,39 @@ export const signInWithEmail = async (email: string, password: string, remember:
   return data.session;
 };
 
-export const signUpWithEmail = async (email: string, password: string) => {
-  const {
-    data: { session },
-    error
-  } = await supabase.auth.signUp({
-    email: email,
-    password: password
+export const signUpWithEmail = async (
+  email: string,
+  password: string,
+  firstName: string,
+  lastName: string
+) => {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password
   });
 
   if (error) {
-    console.error('Error @signUpWithEmail: ', error);
+    console.error('Error @signUpWithEmail:', error);
+    return { session: null, error };
   }
 
-  if (!session) {
-    console.error('Please check your inbox for email verification!');
+  if (!data.session) {
+    console.warn('Please check your inbox for email verification!');
   }
+
+  // User Info Object
+  const userInfoObj = {
+    uid: data.user?.id,
+    first_name: firstName,
+    last_name: lastName,
+    email_address: email,
+    image_url: ''
+  };
+
+  // create user
+  await supabase.from('user_info').insert([userInfoObj]);
+
+  return { session: data.session, error: null };
 };
 
 export const signOut = async () => {
