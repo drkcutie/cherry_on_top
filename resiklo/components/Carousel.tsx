@@ -82,9 +82,8 @@ export default function Carousel() {
             >
                 <View
                     className="w-full h-full border-1 text-right border-black bg-black/40 justify-center gap-5   pb-10  ">
-                    {/* Animated Sliding Text */}
 
-                    <View className="flex flex-row items-center gap-4 self-center">
+                    <View className="flex min-h-10 flex-row items-center gap-4 self-center">
                         {[...Array(3)].map((_, index) => (
                             <Animated.View
                                 key={index}
@@ -93,7 +92,7 @@ export default function Carousel() {
                             />
                         ))}
                     </View>
-                    <Animated.View style={[animatedStyle]} className="flex flex-col gap-3 text-right pl-5">
+                    <Animated.View style={[animatedStyle]} className="flex flex-col gap-3 text-right pl-5 h-[200px] border-black">
 
                         <Text
                             className={` font-roboto-bold text-5xl text-left ${checkIfGreen(textSlides[index][0])} `}>

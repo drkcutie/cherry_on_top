@@ -1,9 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {Image, Pressable, StyleSheet, Text, View} from "react-native";
-import {Style} from "domelementtype";
 import iconImages from "@/constants/icons";
-import {Simulate} from "react-dom/test-utils";
-import progress = Simulate.progress;
 import {Lock, LockKeyhole, LockKeyholeOpen} from "lucide-react-native";
 
 
@@ -31,7 +28,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({ progress , completedProgress 
     );
 };;
 
-export default function RewardCard() {
+export default function RewardCard(){
     const [points, setPoints] = useState(100);
     const progress = 50
     const completeProgress = 100
