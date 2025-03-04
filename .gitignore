@@ -1,2 +1,5 @@
 .idea
 .vscode
+.env
+backend/model/__pycache__/llm.cpython-312.pyc
+backend/model/__pycache__/main.cpython-312.pyc
