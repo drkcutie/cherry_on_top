@@ -27,9 +27,8 @@ export default function ScanScreen() {
         name: uniqueImageName,
         type: "image/jpeg",
       } as any);
-
       try {
-        const response = await axios.post("http://192.168.2.1:8000/detect/", formData, {
+        const response = await axios.post("http://10.0.2.2:8000/detect/", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
 
