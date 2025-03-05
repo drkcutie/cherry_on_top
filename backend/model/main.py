@@ -1,12 +1,13 @@
 import io
 import os
 import uuid
-import httpx
-import yolov5
+import base64
 from dotenv import load_dotenv
-from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, UploadFile, File, HTTPException
-from PIL import Image
+from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
+from PIL import Image, ImageDraw
+import yolov5
 
 
 
@@ -39,15 +40,6 @@ model.max_det = 1000  # maximum number of detections per image
 # class names
 class_names = model.names
 
-import io
-import os
-import uuid
-import base64
-from fastapi import FastAPI, UploadFile, File, HTTPException
-from fastapi.responses import JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
-from PIL import Image, ImageDraw
-import yolov5
 
 app = FastAPI()
 
